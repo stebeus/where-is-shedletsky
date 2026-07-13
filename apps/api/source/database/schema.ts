@@ -11,3 +11,10 @@ export const users = pgTable('users', (t) => ({
 		.defaultNow()
 		.$onUpdate(() => new Date()),
 }));
+
+export const characters = pgTable('characters', (t) => ({
+	id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+	name: t.text().notNull(),
+	description: t.text().notNull(),
+	position: t.point({ mode: 'xy' }).notNull(),
+}));
