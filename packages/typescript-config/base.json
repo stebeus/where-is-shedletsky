@@ -1,0 +1,12 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"erasableSyntaxOnly": true,
+		"module": "esnext",
+		"noEmit": true,
+		"skipLibCheck": true,
+		"target": "esnext",
+		"verbatimModuleSyntax": true
+	}
+}

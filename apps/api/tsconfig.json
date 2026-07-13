@@ -1,0 +1,7 @@
+{
+	"extends": "@repository/typescript-config/base.json",
+	"compilerOptions": {
+		"module": "nodenext",
+		"types": ["node"]
+	}
+}

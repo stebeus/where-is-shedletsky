@@ -1,0 +1,16 @@
+{
+	"extends": "@repository/typescript-config/base.json",
+	"include": ["source"],
+	"compilerOptions": {
+		"lib": ["ESNext", "DOM"],
+		"target": "es6",
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+		"types": ["vite/client"],
+
+		/* Bundling */
+		"moduleDetection": "force",
+		"moduleResolution": "bundler",
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js"
+	}
+}

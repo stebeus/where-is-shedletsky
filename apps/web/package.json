@@ -1,0 +1,26 @@
+{
+	"name": "web",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#root/*": "./source/*"
+	},
+	"scripts": {
+		"build": "tsc --build && vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"@picocss/pico": "^2.1.1",
+		"lucide-solid": "^1.24.0",
+		"solid-js": "^1.9.14",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@repository/typescript-config": "workspace:*",
+		"vite": "^8.1.4",
+		"vite-plugin-solid": "^2.11.12"
+	}
+}

@@ -1,0 +1,5 @@
+@import '@picocss/pico/css/pico.css';
+
+:root {
+	--pico-font-size: 1rem;
+}
