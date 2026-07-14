@@ -5,10 +5,10 @@ import { and, eq, sql } from 'drizzle-orm';
 import { characters } from '#root/database/schema.ts';
 import { database } from '#root/libraries/database.ts';
 
-export const create = async (character: Character) =>
+export const create = (character: Character) =>
 	database.insert(characters).values(character).returning();
 
-export const findMany = async () =>
+export const findMany = () =>
 	database.select().from(characters).orderBy(sql`lower(${characters.name})`);
 
 export const findFirst = async ({ name, position: { x, y } }: CharacterParam) => {
