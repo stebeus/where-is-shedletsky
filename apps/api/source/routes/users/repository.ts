@@ -18,7 +18,7 @@ export const create = async ({ username, password, bestTime }: User) => {
 	return user;
 };
 
-export const findMany = () => database.select().from(users).orderBy(users.bestTime);
+export const findMany = async () => await database.select().from(users).orderBy(users.bestTime);
 
 export const findFirst = async (username: string) => {
 	const [user] = await database.select().from(users).where(eq(users.username, username)).limit(1);
