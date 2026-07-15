@@ -1,4 +1,6 @@
-import * as charactersRepository from '#root/routes/characters/repository.ts';
+import process from 'node:process';
+
+import { create as createCharacter } from '#root/routes/characters/repository.ts';
 
 const characters = [
 	{
@@ -203,4 +205,13 @@ const characters = [
 	},
 ] as const;
 
-characters.map(charactersRepository.create);
+console.log('Seeding...');
+
+try {
+	const data = await Promise.all(characters.map(createCharacter));
+	console.log('Done:', data);
+	process.exit(0);
+} catch (error) {
+	console.error(error);
+	process.exit(1);
+}
