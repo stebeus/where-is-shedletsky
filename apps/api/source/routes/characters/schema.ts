@@ -7,7 +7,7 @@ const coercePosition = (value: string) => {
 	return { x: Number(column), y: Number(row) };
 };
 
-const schema = z.object({
+const characterSchema = z.object({
 	name: z.string(),
 	description: z.string(),
 	position: z
@@ -16,8 +16,8 @@ const schema = z.object({
 		.transform(coercePosition),
 });
 
-export const paramSchema = schema.omit({ description: true });
+export const paramSchema = characterSchema.omit({ description: true });
 
-export type Character = z.infer<typeof schema>;
+export type Character = z.infer<typeof characterSchema>;
 
 export type CharacterParam = Omit<Character, 'description'>;

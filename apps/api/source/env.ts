@@ -12,13 +12,13 @@ try {
 
 const databaseUrlRegex = /(postgres(?:ql)?):\/\/(?:([^@\s]+)@)?([^/\s]+)(?:\/(\w+))?(?:\?(.+))?/;
 
-const schema = z.object({
+const envSchema = z.object({
 	CLIENT_URL: z.url().default('*'),
 	DATABASE_URL: z.url().regex(databaseUrlRegex),
 	PORT: z.coerce.number().int().positive().default(3000),
 });
 
-const { success, error, data } = z.safeParse(schema, process.env);
+const { success, error, data } = z.safeParse(envSchema, process.env);
 
 if (!success) throw new Error(z.prettifyError(error));
 
