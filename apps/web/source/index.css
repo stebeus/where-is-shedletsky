@@ -1,4 +1,4 @@
-@import '@picocss/pico/css/pico.css';
+@import '@picocss/pico/css/pico.css' layer(framework);
 
 :root {
 	--pico-font-size: 1rem;
