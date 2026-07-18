@@ -3,7 +3,7 @@
 	"include": ["source"],
 	"compilerOptions": {
 		"lib": ["ESNext", "DOM"],
-		"target": "es6",
+		"target": "es2023",
 		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
 		"types": ["vite/client"],
 

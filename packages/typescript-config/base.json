@@ -3,7 +3,6 @@
 	"compilerOptions": {
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
-		"module": "esnext",
 		"noEmit": true,
 		"skipLibCheck": true,
 		"target": "esnext",
