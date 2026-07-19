@@ -1,15 +1,21 @@
 import { env } from '#root/env.ts';
 
-class FetchError extends Error {
-	readonly res: Response;
+export class FetchError extends Error {
+	static isInstance = (value: unknown) => value instanceof FetchError;
 
-	constructor(url: URL, res: Response) {
-		super(`Failed to fetch ${url}`);
-		this.res = res;
+	readonly status;
+	readonly #res;
+
+	constructor(res: Response) {
+		super(res.statusText);
+		this.status = res.status;
+		this.#res = res;
+	}
+
+	async json() {
+		return await this.#res.json();
 	}
 }
-
-export const isFetchError = (error: unknown) => error instanceof FetchError;
 
 export const fetchResource = async <Data>(
 	endpoint: string,
@@ -20,7 +26,7 @@ export const fetchResource = async <Data>(
 	const res = await fetch(url, options);
 	const resource = await res.json();
 
-	if (!res.ok) throw new FetchError(url, res);
+	if (!res.ok) throw new FetchError(res);
 
 	return resource.data;
 };
