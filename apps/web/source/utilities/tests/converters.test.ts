@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { toCamelCase } from './converters.ts';
+import { toCamelCase } from '#root/utilities/converters.ts';
 
 describe('toCamelCase', () => {
 	it('camel cases words', () => {
