@@ -5,7 +5,8 @@ import { captureError } from '#root/utilities/errors.ts';
 describe('captureError', () => {
 	describe('Given non-error values,', () => {
 		it('creates an error from them', () => {
-			expect(captureError('string')).toBeInstanceOf(Error);
+			const capturedError = captureError('string');
+			expect(capturedError).toBeInstanceOf(Error);
 		});
 
 		it.for`
@@ -17,22 +18,33 @@ describe('captureError', () => {
 		`(
 			'captures $value as "This value was not thrown as an error: $expected"',
 			({ value, expected }) => {
-				expect(captureError(value).message).toBe(
-					`This value was not thrown as an error: ${expected}`,
-				);
+				const capturedError = captureError(value);
+				expect(capturedError.message).toBe(`This value was not thrown as an error: ${expected}`);
 			},
 		);
 	});
 
 	describe('Given error values,', () => {
-		const error = new Error('error');
-
 		it('preserves the error object', () => {
-			expect(captureError(error)).toBeInstanceOf(Error);
+			// Arrange
+			const error = new Error();
+
+			// Act
+			const capturedError = captureError(error);
+
+			// Assert
+			expect(capturedError).toBeInstanceOf(Error);
 		});
 
 		it('preserves the error message', () => {
-			expect(captureError(error).message).toBe('error');
+			// Arrange
+			const error = new Error('error');
+
+			// Act
+			const capturedError = captureError(error);
+
+			// Assert
+			expect(capturedError.message).toBe('error');
 		});
 	});
 });
