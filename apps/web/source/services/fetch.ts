@@ -9,6 +9,8 @@ class FetchError extends Error {
 	}
 }
 
+export const isFetchError = (error: unknown) => error instanceof FetchError;
+
 export const fetchResource = async <Data>(
 	endpoint: string,
 	options?: RequestInit,
