@@ -1,0 +1,75 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
+	"extends": "//",
+	"linter": {
+		"rules": {
+			"correctness": {
+				"noNestedComponentDefinitions": "on"
+			},
+			"nursery": {
+				"useBaseline": "on"
+			},
+			"style": {
+				"noHexColors": "on",
+				"useConsistentCurlyBraces": "on",
+				"useSelfClosingElements": "on"
+			},
+			"suspicious": {
+				"noDuplicatedSpreadProps": "on",
+				"noLeakedRender": "on"
+			}
+		}
+	},
+	"css": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"html": {
+		"formatter": {
+			"enabled": true
+		}
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"noDuplicateClasses": "on",
+				"useSortedProperties": "on"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.{jsx,tsx}"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useNamingConvention": {
+							"level": "on",
+							"options": {
+								"conventions": [
+									{
+										"formats": ["camelCase", "PascalCase"],
+										"selector": {
+											"kind": "objectLiteralProperty"
+										}
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.svg"],
+			"linter": {
+				"rules": {
+					"a11y": {
+						"noSvgWithoutTitle": "off"
+					}
+				}
+			}
+		}
+	]
+}

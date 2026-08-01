@@ -1,0 +1,29 @@
+{
+	"name": "web",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#root/*": "./src/*"
+	},
+	"scripts": {
+		"build": "tsc --build && vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"lucide-preact": "^1.28.0",
+		"open-props": "^1.7.23",
+		"preact": "^10.29.7",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@preact/preset-vite": "^2.10.6",
+		"@repo/typescript-config": "workspace:*",
+		"@vitest/browser-playwright": "^4.1.10",
+		"typescript": "catalog:",
+		"vite": "^8.2.0",
+		"vitest": "catalog:"
+	}
+}
