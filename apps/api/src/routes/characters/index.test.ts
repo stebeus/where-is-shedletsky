@@ -5,7 +5,7 @@ import { app } from '#root/app.ts';
 const URL = '/api/v1/characters';
 
 describe('GET /characters', () => {
-	it('retrieves all characters', async () => {
+	it('retrieves characters', async () => {
 		const res = await app.request(URL);
 		const { data } = await res.json();
 
