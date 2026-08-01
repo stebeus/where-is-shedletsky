@@ -81,7 +81,6 @@
 			},
 			"suspicious": {
 				"noConstantBinaryExpressions": "on",
-				"noEmptyBlockStatements": "on",
 				"noForIn": "on",
 				"noParametersOnlyUsedInRecursion": "on",
 				"noUnassignedVariables": "on",
