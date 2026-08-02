@@ -26,6 +26,7 @@
 				"noExcessiveLinesPerFunction": "off"
 			},
 			"correctness": {
+				"noUnresolvedImports": "off",
 				"noUnusedInstantiation": "on"
 			},
 			"style": {
