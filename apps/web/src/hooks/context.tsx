@@ -1,7 +1,9 @@
-import { createContext, type FunctionComponent } from 'preact';
+import { type ComponentChildren, createContext } from 'preact';
 import { useContext } from 'preact/hooks';
 
-type ContextProviderProps = Record<string, unknown>;
+type ContextProviderProps = Record<string, unknown> & {
+	children: ComponentChildren;
+};
 
 export const createContextProvider = <Props extends ContextProviderProps, ContextValue>(
 	valueFactory: (props: Props) => ContextValue,
@@ -10,7 +12,7 @@ export const createContextProvider = <Props extends ContextProviderProps, Contex
 ) => {
 	const Context = createContext(defaultValue);
 
-	const Provider: FunctionComponent<Props> = (props) => {
+	const Provider = (props: Props) => {
 		const value = valueFactory(props);
 		return <Context.Provider value={value}>{props.children}</Context.Provider>;
 	};
