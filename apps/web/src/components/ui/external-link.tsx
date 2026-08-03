@@ -1,6 +1,8 @@
-import type { AnchorHTMLAttributes } from 'preact';
+import type { AnchorHTMLAttributes } from 'react';
 
-export const ExternalLink = ({ href, children }: AnchorHTMLAttributes) => (
+type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 	<a href={href} target="_blank" rel="noopener noreferrer">
 		{children}
 	</a>

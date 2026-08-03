@@ -13,16 +13,21 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@preact/signals": "^2.10.1",
-		"lucide-preact": "^1.28.0",
+		"lucide-react": "^1.28.0",
 		"open-props": "^1.7.23",
-		"preact": "^10.29.7",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@preact/preset-vite": "^2.10.6",
+		"@babel/core": "^8.0.1",
 		"@repo/typescript-config": "workspace:*",
-		"@vitest/browser-playwright": "^4.1.10",
+		"@rolldown/plugin-babel": "^0.2.3",
+		"@types/babel__core": "^7.20.5",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
+		"@vitejs/plugin-react": "^6.0.5",
+		"babel-plugin-react-compiler": "^1.0.0",
 		"typescript": "catalog:",
 		"vite": "^8.2.0",
 		"vitest": "catalog:"

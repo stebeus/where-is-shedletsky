@@ -1,8 +1,7 @@
-import { type ComponentChildren, createContext } from 'preact';
-import { useContext } from 'preact/hooks';
+import { type AnchorHTMLAttributes, createContext, type ReactNode, useContext } from 'react';
 
 type ContextProviderProps = Record<string, unknown> & {
-	children: ComponentChildren;
+	children: ReactNode;
 };
 
 export const createContextProvider = <Props extends ContextProviderProps, ContextValue>(

@@ -1,8 +1,16 @@
-import type { ButtonHTMLAttributes, DialogHTMLAttributes } from 'preact';
+import type { DialogHTMLAttributes } from 'react';
 
-import { InvokerButton, InvokerProvider, PopoverTrigger, useInvokerContext } from './ui/index.ts';
+import {
+	type ButtonProps,
+	InvokerButton,
+	InvokerProvider,
+	PopoverTrigger,
+	useInvokerContext,
+} from './ui/index.ts';
 
-const ModalWindow = ({ children, ...props }: DialogHTMLAttributes) => {
+type DialogProps = DialogHTMLAttributes<HTMLDialogElement>;
+
+const ModalWindow = ({ children, ...props }: DialogProps) => {
 	const { id } = useInvokerContext();
 
 	return (
@@ -12,15 +20,15 @@ const ModalWindow = ({ children, ...props }: DialogHTMLAttributes) => {
 	);
 };
 
-const DialogWindow = ({ children }: DialogHTMLAttributes) => (
-	<ModalWindow popover>{children}</ModalWindow>
+const DialogWindow = ({ children }: DialogProps) => (
+	<ModalWindow popover="auto">{children}</ModalWindow>
 );
 
-const ModalTrigger = ({ children }: ButtonHTMLAttributes) => (
+const ModalTrigger = ({ children }: ButtonProps) => (
 	<InvokerButton command="show-modal">{children}</InvokerButton>
 );
 
-const Close = ({ children }: ButtonHTMLAttributes) => (
+const Close = ({ children }: ButtonProps) => (
 	<InvokerButton command="close">{children}</InvokerButton>
 );
 

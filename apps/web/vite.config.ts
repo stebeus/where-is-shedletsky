@@ -1,22 +1,14 @@
-import preact from '@preact/preset-vite';
-import { playwright } from '@vitest/browser-playwright';
+import babel from '@rolldown/plugin-babel';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [preact()],
+	plugins: [babel({ presets: [reactCompilerPreset()] }), react()],
 	preview: {
 		port: 8080,
 	},
 	server: {
 		port: 4000,
-	},
-	test: {
-		browser: {
-			enabled: true,
-			headless: true,
-			instances: [{ browser: 'chromium' }],
-			provider: playwright(),
-		},
 	},
 });

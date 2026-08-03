@@ -1,10 +1,10 @@
-import type { ButtonHTMLAttributes } from 'preact';
-
-import { useId } from 'preact/hooks';
+import { type ButtonHTMLAttributes, useId } from 'react';
 
 import { createContextProvider } from '#root/hooks/context.tsx';
 
-export const Button = ({ type = 'button', children, ...props }: ButtonHTMLAttributes) => (
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+export const Button = ({ type = 'button', children, ...props }: ButtonProps) => (
 	<button type={type} {...props}>
 		{children}
 	</button>
@@ -15,7 +15,7 @@ export const [InvokerProvider, useInvokerContext] = createContextProvider(
 	'Invoker',
 );
 
-export const InvokerButton = ({ command, children }: ButtonHTMLAttributes) => {
+export const InvokerButton = ({ command, children }: ButtonProps) => {
 	const { id } = useInvokerContext();
 
 	return (
@@ -25,10 +25,10 @@ export const InvokerButton = ({ command, children }: ButtonHTMLAttributes) => {
 	);
 };
 
-export const PopoverTrigger = ({ children }: ButtonHTMLAttributes) => (
+export const PopoverTrigger = ({ children }: ButtonProps) => (
 	<InvokerButton command="toggle-popover">{children}</InvokerButton>
 );
 
-export const SubmitButton = ({ children }: ButtonHTMLAttributes) => (
+export const SubmitButton = ({ children }: ButtonProps) => (
 	<Button type="submit">{children}</Button>
 );
