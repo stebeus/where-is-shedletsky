@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"imports": {
-		"#root/*": "./src/*"
+		"#*": "./src/*"
 	},
 	"scripts": {
 		"build": "tsc --build && vite build",

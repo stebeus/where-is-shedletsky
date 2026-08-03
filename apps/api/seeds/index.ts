@@ -1,6 +1,6 @@
 import { exit } from 'node:process';
 
-import { create } from '#root/routes/characters/repository.ts';
+import { create } from '#routes/characters/repository.ts';
 
 import characters from './characters.json' with { type: 'json' };
 

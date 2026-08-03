@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 
-import { db } from '#root/db/client.ts';
+import { db } from '#db/client.ts';
 
 import { type NewUser, type UserUpdate, users } from './schema.ts';
 

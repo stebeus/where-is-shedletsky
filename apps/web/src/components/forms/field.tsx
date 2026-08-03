@@ -1,6 +1,6 @@
 import { type InputHTMLAttributes, type ReactNode, useId } from 'react';
 
-import { toCamelCase } from '#root/utils/formatters.ts';
+import { toCamelCase } from '#utils/formatters.ts';
 
 type FieldRenderProps = {
 	name: string;

@@ -1,4 +1,4 @@
-import { env } from '#root/env.ts';
+import { env } from '#env.ts';
 
 export class FetchError extends Error {
 	static isInstance(value: unknown) {

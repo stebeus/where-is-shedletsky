@@ -1,6 +1,6 @@
 import { type ButtonHTMLAttributes, useId } from 'react';
 
-import { createContextProvider } from '#root/hooks/context.tsx';
+import { createContextProvider } from '#hooks/context.tsx';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 

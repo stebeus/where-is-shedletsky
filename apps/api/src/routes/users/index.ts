@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 
-import { validate } from '#root/middleware/validator.ts';
+import { validate } from '#middleware/validator.ts';
 
 import { findMany } from './repository.ts';
 import { newUserSchema } from './schema.ts';

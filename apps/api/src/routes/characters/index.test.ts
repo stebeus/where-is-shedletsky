@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { app } from '#root/app.ts';
+import { app } from '#app.ts';
 
 const URL = '/api/v1/characters';
 
