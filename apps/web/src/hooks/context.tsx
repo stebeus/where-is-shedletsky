@@ -1,4 +1,4 @@
-import { type AnchorHTMLAttributes, createContext, type ReactNode, useContext } from 'react';
+import { createContext, type ReactNode, useContext } from 'react';
 
 type ContextProviderProps = Record<string, unknown> & {
 	children: ReactNode;
