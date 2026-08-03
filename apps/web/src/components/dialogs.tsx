@@ -9,7 +9,7 @@ import {
 } from './ui/index.ts';
 
 type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
-	ref: Ref<HTMLDialogElement>;
+	ref?: Ref<HTMLDialogElement>;
 };
 
 const ModalWindow = ({ children, ...props }: DialogProps) => {
