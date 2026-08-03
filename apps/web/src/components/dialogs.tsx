@@ -1,4 +1,4 @@
-import type { DialogHTMLAttributes } from 'react';
+import type { DialogHTMLAttributes, Ref } from 'react';
 
 import {
 	type ButtonProps,
@@ -8,7 +8,9 @@ import {
 	useInvokerContext,
 } from './ui/index.ts';
 
-type DialogProps = DialogHTMLAttributes<HTMLDialogElement>;
+type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
+	ref: Ref<HTMLDialogElement>;
+};
 
 const ModalWindow = ({ children, ...props }: DialogProps) => {
 	const { id } = useInvokerContext();
@@ -20,8 +22,10 @@ const ModalWindow = ({ children, ...props }: DialogProps) => {
 	);
 };
 
-const DialogWindow = ({ children }: DialogProps) => (
-	<ModalWindow popover="auto">{children}</ModalWindow>
+const DialogWindow = ({ children, ...props }: DialogProps) => (
+	<ModalWindow popover="auto" {...props}>
+		{children}
+	</ModalWindow>
 );
 
 const ModalTrigger = ({ children }: ButtonProps) => (
