@@ -16,6 +16,6 @@ export const Footer = () => (
 		</p>
 		<ExternalLink href="https://github.com/stebeus">
 			<SvgIcon title="GitHub" />
-		</ExternalLink>{' '}
+		</ExternalLink>
 	</footer>
 );
