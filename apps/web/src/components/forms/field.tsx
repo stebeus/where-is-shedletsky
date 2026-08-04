@@ -35,10 +35,14 @@ export const Field = ({ label, helperText, children }: FieldProps) => {
 
 export const Input = ({ type = 'text', ...props }: InputProps) => <input type={type} {...props} />;
 
-export const InputField = ({ label, helperText, ...inputProps }: InputFieldProps) => (
-	<Field label={label} helperText={helperText}>
-		{({ name, helperTextId }) => (
-			<Input name={name} aria-describedby={helperTextId} {...inputProps} />
-		)}
-	</Field>
-);
+export const InputField = ({ label, helperText, ...inputProps }: InputFieldProps) => {
+	const renderInput = ({ name, helperTextId }: FieldRenderProps) => (
+		<Input name={name} aria-describedby={helperTextId} {...inputProps} />
+	);
+
+	return (
+		<Field label={label} helperText={helperText}>
+			{renderInput}
+		</Field>
+	);
+};
