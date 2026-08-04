@@ -12,7 +12,7 @@ type ErrorBoundaryState = {
 };
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-	getDerivedStateFromError(error: Error) {
+	static getDerivedStateFromError(error: Error) {
 		return { error };
 	}
 
