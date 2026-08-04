@@ -32,20 +32,24 @@ const ModalTrigger = ({ children }: ButtonProps) => (
 	<InvokerButton command="show-modal">{children}</InvokerButton>
 );
 
-const Close = ({ children }: ButtonProps) => (
+const ModalClose = ({ children }: ButtonProps) => (
 	<InvokerButton command="close">{children}</InvokerButton>
+);
+
+const DialogClose = ({ children }: ButtonProps) => (
+	<InvokerButton command="hide-popover">{children}</InvokerButton>
 );
 
 export const Modal = {
 	Root: InvokerProvider,
 	Window: ModalWindow,
 	Trigger: ModalTrigger,
-	Close,
+	Close: ModalClose,
 };
 
 export const Dialog = {
 	Root: InvokerProvider,
 	Window: DialogWindow,
 	Trigger: PopoverTrigger,
-	Close,
+	Close: DialogClose,
 };
