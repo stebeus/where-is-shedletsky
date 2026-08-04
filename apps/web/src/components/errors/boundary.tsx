@@ -1,9 +1,9 @@
 import { Component, captureOwnerStack, type ErrorInfo, type ReactNode } from 'react';
 
-type FallbackRenderer = (error: Error, reset: () => void) => ReactNode;
+import { type ErrorFallbackProps, renderErrorFallback } from './fallback.tsx';
 
 type ErrorBoundaryProps = {
-	fallback: ReactNode | FallbackRenderer;
+	fallback: ReactNode | ((props: ErrorFallbackProps) => ReactNode);
 	children: ReactNode;
 };
 
@@ -12,6 +12,8 @@ type ErrorBoundaryState = {
 };
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+	static defaultProps = { fallback: renderErrorFallback };
+
 	static getDerivedStateFromError(error: Error) {
 		return { error };
 	}
@@ -22,15 +24,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 		console.log(error, componentStack, captureOwnerStack());
 	}
 
-	reset() {
-		return this.setState({});
-	}
+	reset = () => this.setState({ error: undefined });
 
 	render() {
 		const { error } = this.state;
 		const { fallback, children } = this.props;
 
 		if (error == null) return children;
-		return typeof fallback === 'function' ? fallback(error, this.reset) : fallback;
+		return typeof fallback === 'function' ? fallback({ error, reset: this.reset }) : fallback;
 	}
 }
