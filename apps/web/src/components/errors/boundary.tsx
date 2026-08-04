@@ -30,10 +30,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 		const { error } = this.state;
 		const { fallback, children } = this.props;
 
-		if (error != null) {
-			return typeof fallback === 'function' ? fallback(error, this.reset) : fallback;
-		}
-
-		return children;
+		if (error == null) return children;
+		return typeof fallback === 'function' ? fallback(error, this.reset) : fallback;
 	}
 }
