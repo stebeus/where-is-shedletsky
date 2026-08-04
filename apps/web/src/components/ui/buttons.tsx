@@ -1,6 +1,6 @@
 import { type ButtonHTMLAttributes, useId } from 'react';
 
-import { createContextProvider } from '#hooks/context.tsx';
+import { createSafeContext } from '#hooks/context.tsx';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -10,7 +10,7 @@ export const Button = ({ type = 'button', children, ...props }: ButtonProps) => 
 	</button>
 );
 
-export const [InvokerProvider, useInvokerContext] = createContextProvider(
+export const [InvokerProvider, useInvokerContext] = createSafeContext(
 	() => ({ id: useId() }),
 	'Invoker',
 );
