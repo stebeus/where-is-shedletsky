@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { toCamelCase, toKebabCase } from './formatters.ts';
+import { toCamelCase, toKebabCase } from '#utils/formatters.ts';
 
 describe('toCamelCase', () => {
 	it('camel cases strings', () => {
