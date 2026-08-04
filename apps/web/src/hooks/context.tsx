@@ -1,23 +1,22 @@
-import { createContext, type ReactNode, useContext } from 'react';
+import { createContext, type ReactNode, use } from 'react';
 
-type ContextProviderProps = Record<string, unknown> & {
+type ProviderProps = Record<string, unknown> & {
 	children: ReactNode;
 };
 
-export const createContextProvider = <Props extends ContextProviderProps, ContextValue>(
+export const createContextProvider = <Props extends ProviderProps, ContextValue>(
 	valueFactory: (props: Props) => ContextValue,
 	name: Capitalize<string>,
 	defaultValue?: ContextValue,
 ) => {
 	const Context = createContext(defaultValue);
 
-	const Provider = (props: Props) => {
-		const value = valueFactory(props);
-		return <Context.Provider value={value}>{props.children}</Context.Provider>;
-	};
+	const Provider = (props: Props) => (
+		<Context value={valueFactory(props)}>{props.children}</Context>
+	);
 
 	const useSafeContext = () => {
-		const safeContext = useContext(Context);
+		const safeContext = use(Context);
 		if (safeContext == null) throw new Error(`${name}Context is missing`);
 		return safeContext;
 	};
