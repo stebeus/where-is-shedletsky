@@ -21,7 +21,7 @@ const ModalWindow = (props: DialogProps) => {
 };
 
 const DialogWindow = (props: DialogProps) => (
-	<ModalWindow popover {...props}>
+	<ModalWindow popover="auto" {...props}>
 		{props.children}
 	</ModalWindow>
 );
