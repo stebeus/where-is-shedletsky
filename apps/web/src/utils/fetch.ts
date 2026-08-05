@@ -28,12 +28,12 @@ export const fetchData = async <Data>(url: string, options?: RequestInit): Promi
 };
 
 export const fetchInternalData = async <Data>(endpoint: string, options?: RequestInit) => {
-	type Result = {
+	type InternalData = {
 		data: Data;
 	};
 
 	const url = `${env.VITE_API_URL}/${endpoint}`;
-	const { data } = await fetchData<Result>(url, options);
+	const { data } = await fetchData<InternalData>(url, options);
 
 	return data;
 };
