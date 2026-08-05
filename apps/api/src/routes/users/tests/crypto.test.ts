@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { compare, hash } from '#routes/users/crypto.ts';
+import { compare, hash } from '#routes/users/crypto';
 
 describe('compare', () => {
 	it('confirms that the password mismatches the hash', async () => {

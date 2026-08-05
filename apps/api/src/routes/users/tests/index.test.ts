@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
-import { app } from '#app.ts';
+import { app } from '#app';
 
 const URL = '/api/v1/users';
 
