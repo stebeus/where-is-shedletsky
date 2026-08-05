@@ -12,7 +12,10 @@
 			"style": {
 				"noHexColors": "on",
 				"useConsistentCurlyBraces": "on",
-				"useSelfClosingElements": "on"
+				"useSelfClosingElements": {
+					"level": "on",
+					"fix": "unsafe"
+				}
 			},
 			"suspicious": {
 				"noDuplicatedSpreadProps": "on",
