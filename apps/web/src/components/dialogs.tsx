@@ -40,7 +40,7 @@ const DialogClose = (props: ButtonProps) => (
 
 export const Modal = {
 	Root: InvokerProvider,
-	Window: DialogWindow,
+	Window: ModalWindow,
 	Trigger: ModalTrigger,
 	Close: ModalClose,
 };
