@@ -1,48 +1,46 @@
-import type { DialogHTMLAttributes, Ref } from 'react';
+import type { JSX } from 'solid-js';
 
 import {
 	type ButtonProps,
 	InvokerButton,
 	InvokerProvider,
 	PopoverTrigger,
-	useInvokerContext,
+	useInvoker,
 } from './ui/index.ts';
 
-type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
-	ref?: Ref<HTMLDialogElement>;
-};
+type DialogProps = JSX.DialogHtmlAttributes<HTMLDialogElement>;
 
-const ModalWindow = ({ children, ...props }: DialogProps) => {
-	const { id } = useInvokerContext();
+const ModalWindow = (props: DialogProps) => {
+	const { id } = useInvoker();
 
 	return (
 		<dialog id={id} {...props}>
-			{children}
+			{props.children}
 		</dialog>
 	);
 };
 
-const DialogWindow = ({ children, ...props }: DialogProps) => (
-	<ModalWindow popover="auto" {...props}>
-		{children}
+const DialogWindow = (props: DialogProps) => (
+	<ModalWindow popover {...props}>
+		{props.children}
 	</ModalWindow>
 );
 
-const ModalTrigger = ({ children }: ButtonProps) => (
-	<InvokerButton command="show-modal">{children}</InvokerButton>
+const ModalTrigger = (props: ButtonProps) => (
+	<InvokerButton command="show-modal">{props.children}</InvokerButton>
 );
 
-const ModalClose = ({ children }: ButtonProps) => (
-	<InvokerButton command="close">{children}</InvokerButton>
+const ModalClose = (props: ButtonProps) => (
+	<InvokerButton command="close">{props.children}</InvokerButton>
 );
 
-const DialogClose = ({ children }: ButtonProps) => (
-	<InvokerButton command="hide-popover">{children}</InvokerButton>
+const DialogClose = (props: ButtonProps) => (
+	<InvokerButton command="hide-popover">{props.children}</InvokerButton>
 );
 
 export const Modal = {
 	Root: InvokerProvider,
-	Window: ModalWindow,
+	Window: DialogWindow,
 	Trigger: ModalTrigger,
 	Close: ModalClose,
 };

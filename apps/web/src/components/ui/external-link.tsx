@@ -1,9 +1,9 @@
-import type { AnchorHTMLAttributes } from 'react';
+import type { JSX } from 'solid-js';
 
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
+type ExternalLinkProps = JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export const ExternalLink = ({ href, children }: ExternalLinkProps) => (
-	<a href={href} target="_blank" rel="noopener noreferrer">
-		{children}
+export const ExternalLink = (props: ExternalLinkProps) => (
+	<a target="_blank" rel="noopener noreferrer" {...props}>
+		{props.children}
 	</a>
 );

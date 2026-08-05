@@ -13,23 +13,16 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"lucide-react": "^1.28.0",
+		"lucide-solid": "^1.28.0",
 		"open-props": "^1.7.23",
-		"react": "^19.2.8",
-		"react-dom": "^19.2.8",
+		"solid-js": "^1.9.14",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@babel/core": "^8.0.1",
 		"@repo/typescript-config": "workspace:*",
-		"@rolldown/plugin-babel": "^0.2.3",
-		"@types/babel__core": "^7.20.5",
-		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.4",
-		"@vitejs/plugin-react": "^6.0.5",
-		"babel-plugin-react-compiler": "^1.0.0",
 		"typescript": "catalog:",
 		"vite": "^8.2.0",
+		"vite-plugin-solid": "^2.11.14",
 		"vitest": "catalog:"
 	}
 }

@@ -1,6 +1,8 @@
-import { type InputHTMLAttributes, type ReactNode, useId } from 'react';
+import { createUniqueId, type JSX, splitProps } from 'solid-js';
 
-import { toCamelCase } from '#utils/index.ts';
+import { toCamelCase } from '#utils/formatters.ts';
+
+import { Input, type InputProps } from './input.ts';
 
 type FieldRenderProps = {
 	name: string;
@@ -10,39 +12,33 @@ type FieldRenderProps = {
 type FieldProps = {
 	label: string;
 	helperText?: string;
-	children: (props: FieldRenderProps) => ReactNode;
+	children: (props: FieldRenderProps) => JSX.Element;
 };
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+type FieldPropParams = Omit<FieldProps, 'children'>;
 
-type InputFieldProps = Omit<FieldProps, 'children'> & InputProps;
+type InputField = FieldPropParams & InputProps;
 
-const hasHelperText = (helperText?: string) => helperText != null;
-
-export const Field = ({ label, helperText, children }: FieldProps) => {
-	const name = toCamelCase(label);
-	const helperTextId = useId();
+const Field = (props: FieldProps) => {
+	const name = toCamelCase(props.label);
+	const helperTextId = props.helperText == null ? undefined : createUniqueId();
 
 	return (
 		// biome-ignore lint/a11y/noLabelWithoutControl: the children are form controls
 		<label>
-			<span>{label}</span>
-			{children({ name, helperTextId: hasHelperText(helperText) ? helperTextId : undefined })}
-			{hasHelperText(helperText) && <span id={helperTextId}>{helperText}</span>}
+			<span>{props.label}</span>
+			{props.children({ name, helperTextId })}
+			{props.helperText != null && <span id={helperTextId}>{props.helperText}</span>}
 		</label>
 	);
 };
 
-export const Input = ({ type = 'text', ...props }: InputProps) => <input type={type} {...props} />;
-
-export const InputField = ({ label, helperText, ...inputProps }: InputFieldProps) => {
-	const renderInput = ({ name, helperTextId }: FieldRenderProps) => (
-		<Input name={name} aria-describedby={helperTextId} {...inputProps} />
-	);
+export const InputField = (props: InputField) => {
+	const [local, rest] = splitProps(props, ['label', 'helperText']);
 
 	return (
-		<Field label={label} helperText={helperText}>
-			{renderInput}
+		<Field label={local.label} helperText={local.helperText}>
+			{(props) => <Input name={props.name} aria-describedby={props.helperTextId} {...rest} />}
 		</Field>
 	);
 };

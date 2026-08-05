@@ -8,9 +8,10 @@
 		"types": ["vite/client"],
 
 		/* Bundling */
-		"jsx": "react-jsx",
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
 		"moduleDetection": "force",
 		"moduleResolution": "bundler"
 	},
-	"include": ["src"]
+	"include": ["src", "../deprecated"]
 }

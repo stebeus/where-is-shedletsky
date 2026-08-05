@@ -1,14 +1,16 @@
-import babel from '@rolldown/plugin-babel';
-import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import solid from 'vite-plugin-solid';
 import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [babel({ presets: [reactCompilerPreset()] }), react()],
+	plugins: [solid()],
 	preview: {
 		port: 8080,
 	},
 	server: {
 		port: 4000,
+	},
+	test: {
+		environment: 'node',
 	},
 });
