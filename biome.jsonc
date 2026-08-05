@@ -68,7 +68,7 @@
 						"patterns": [
 							{
 								"group": "../**/*",
-								"message": "Avoid relative parent imports. Use `#*` absolute paths instead."
+								"message": "Avoid relative parent imports. Use `#*` import aliases instead."
 							}
 						]
 					}
