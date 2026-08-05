@@ -20,4 +20,7 @@ const ErrorFallback = (props: ErrorFallbackProps) => (
 	</>
 );
 
-export const renderErrorFallback = (props: ErrorFallbackProps) => <ErrorFallback {...props} />;
+export const renderErrorFallback = <ErrorConstructor extends Error = Error>(
+	error: ErrorConstructor,
+	reset: () => void,
+) => <ErrorFallback error={error} reset={reset} />;
