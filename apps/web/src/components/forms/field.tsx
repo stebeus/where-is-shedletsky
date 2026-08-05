@@ -1,10 +1,8 @@
-import { createUniqueId, type JSX, splitProps } from 'solid-js';
+import { type Accessor, createUniqueId, type JSX } from 'solid-js';
 
 import { toCamelCase } from '#utils/formatters.ts';
 
-import { Input, type InputProps } from './input.ts';
-
-type FieldRenderProps = {
+export type FieldRenderProps = {
 	name: string;
 	helperTextId?: string;
 };
@@ -14,10 +12,6 @@ type FieldProps = {
 	helperText?: string;
 	children: (props: FieldRenderProps) => JSX.Element;
 };
-
-type FieldPropParams = Omit<FieldProps, 'children'>;
-
-type InputField = FieldPropParams & InputProps;
 
 const Field = (props: FieldProps) => {
 	const name = toCamelCase(props.label);
@@ -33,12 +27,4 @@ const Field = (props: FieldProps) => {
 	);
 };
 
-export const InputField = (props: InputField) => {
-	const [local, rest] = splitProps(props, ['label', 'helperText']);
-
-	return (
-		<Field label={local.label} helperText={local.helperText}>
-			{(props) => <Input name={props.name} aria-describedby={props.helperTextId} {...rest} />}
-		</Field>
-	);
-};
+export const renderField = (props: Accessor<FieldProps>) => <Field {...props()} />;
