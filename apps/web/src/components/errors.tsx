@@ -1,5 +1,5 @@
 import errorImage from '#assets/error.webp';
-import { FetchError } from '#utils/fetch.ts';
+import { FetchError } from '#utils/index.ts';
 
 import { Button } from './ui/index.ts';
 

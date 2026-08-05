@@ -1,6 +1,6 @@
 import { type Accessor, createUniqueId, type JSX } from 'solid-js';
 
-import { toCamelCase } from '#utils/formatters.ts';
+import { toCamelCase } from '#utils/index.ts';
 
 export type FieldRenderProps = {
 	name: string;

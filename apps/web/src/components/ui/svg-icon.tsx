@@ -1,4 +1,4 @@
-import { toKebabCase } from '#utils/formatters.ts';
+import { toKebabCase } from '#utils/index.ts';
 
 type SvgIconProps = {
 	title: string;
