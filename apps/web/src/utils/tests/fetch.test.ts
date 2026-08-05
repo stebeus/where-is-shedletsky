@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { FetchError } from '#utils/fetch.ts';
 
-describe('FetchError', () => {
+describe('FetchError.isInstance', () => {
 	it('confirms that it is not a fetch error', () => {
 		const error = new Error();
 		expect(FetchError.isInstance(error)).toBeFalsy();
