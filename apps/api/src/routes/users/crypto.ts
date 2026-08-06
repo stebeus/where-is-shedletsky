@@ -13,6 +13,7 @@ export const hash = async (string: string) => {
 
 export const compare = async (hash: string, string: string) => {
 	const [salt, key] = hash.split(':');
+	if (salt == null || key == null) return false;
 
 	const buffer = Buffer.from(key, 'hex');
 	const derivedKey = await promisifiedScrypt(string, salt, KEY_LENGTH);
