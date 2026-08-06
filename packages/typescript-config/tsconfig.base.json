@@ -1,9 +1,7 @@
 {
 	"compilerOptions": {
-		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true,
 		"esModuleInterop": true,
-		"noEmit": true,
 		"skipLibCheck": true,
 		"target": "esnext",
 		"verbatimModuleSyntax": true
