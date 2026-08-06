@@ -1,4 +1,4 @@
-import type { NewUser } from './schema.ts';
+import type { NewUser } from '@repo/contracts/users';
 
 import { HTTPException } from 'hono/http-exception';
 

@@ -1,8 +1,10 @@
+import type { GetCharacterRequest, NewCharacter } from '@repo/contracts/characters';
+
 import { and, eq, sql } from 'drizzle-orm';
 
 import { db } from '#db/client.ts';
 
-import { characters, type GetCharacterRequest, type NewCharacter } from './schema.ts';
+import { characters } from './schema.ts';
 
 export const create = async (character: NewCharacter) => {
 	const [data] = await db.insert(characters).values(character).returning();

@@ -1,9 +1,10 @@
 import { Hono } from 'hono';
 
+import { getCharacterRequestSchema } from '@repo/contracts/characters';
+
 import { validate } from '#middleware/validator.ts';
 
 import { findFirst, findMany } from './repository.ts';
-import { getCharacterRequestSchema } from './schema.ts';
 
 export const characters = new Hono();
 

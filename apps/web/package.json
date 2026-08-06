@@ -19,6 +19,7 @@
 		"zod": "catalog:"
 	},
 	"devDependencies": {
+		"@repo/contracts": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
 		"typescript": "catalog:",
 		"vite": "^8.2.0",

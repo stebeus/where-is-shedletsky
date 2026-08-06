@@ -1,8 +1,10 @@
+import type { NewUser, UserUpdate } from '@repo/contracts/users';
+
 import { eq } from 'drizzle-orm';
 
 import { db } from '#db/client.ts';
 
-import { type NewUser, type UserUpdate, users } from './schema.ts';
+import { users } from './schema.ts';
 
 export const create = async (user: NewUser) => {
 	const [data] = await db.insert(users).values(user).onConflictDoNothing().returning();
