@@ -1,0 +1,19 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
+	"extends": "//",
+	"linter": {
+		"rules": {
+			"correctness": {
+				"useImportExtensions": {
+					"level": "on",
+					"options": {
+						"extensionMappings": {
+							"ts": "js",
+							"tsx": "js"
+						}
+					}
+				}
+			}
+		}
+	}
+}
