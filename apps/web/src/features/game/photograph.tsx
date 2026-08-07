@@ -47,11 +47,13 @@ const renderCell = (row: any, positionSetter: any) => (placements: any, column: 
 	);
 };
 
-export const Photograph = ({ characters, positionSetter }: any) => {
-	const placements = characters.map(createPlacement);
-	const grid = createGrid(characters.length, characters[0].length, placements);
+export const Photograph = (props: any) => {
+	console.log(props.characters());
 
-	const renderRow = (_: any, row: any) => grid[row]!.map(renderCell(row, positionSetter));
+	const placements = props.characters().map(createPlacement);
+	const grid = createGrid(50, 50, placements);
+
+	const renderRow = (_: any, row: any) => grid[row]!.map(renderCell(row, props.positionSetter));
 
 	return (
 		<div>
