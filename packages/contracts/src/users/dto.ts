@@ -5,7 +5,7 @@ import { formatMilliseconds } from './helpers.js';
 
 export const authSchema = z.object({
 	...newUserSchema.shape,
-	bestTime: z.coerce.number().int().transform(formatMilliseconds),
+	bestTime: z.coerce.number().int().positive().transform(formatMilliseconds),
 });
 
 export type GetUserRequest = Omit<User, 'password'>;
