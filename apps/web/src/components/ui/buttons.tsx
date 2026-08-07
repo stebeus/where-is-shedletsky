@@ -27,4 +27,8 @@ export const PopoverTrigger = (props: ButtonProps) => (
 	<InvokerButton command="toggle-popover">{props.children}</InvokerButton>
 );
 
-export const SubmitButton = (props: ButtonProps) => <Button type="submit">{props.children}</Button>;
+export const SubmitButton = (props: ButtonProps) => (
+	<Button type="submit" onClick={props.onClick}>
+		{props.children}
+	</Button>
+);
