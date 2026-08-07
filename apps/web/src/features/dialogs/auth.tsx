@@ -19,10 +19,10 @@ const fields = [
 	{
 		label: 'Username',
 		children: renderInput({
-			// autocomplete: 'username',
-			// pattern: '\\w+',
-			// placeholder: 'john_doe123',
-			// maxLength: username.maxLength as number,
+			autocomplete: 'username',
+			pattern: '\\w+',
+			placeholder: 'john_doe123',
+			maxLength: username.maxLength as number,
 			required: true,
 		}),
 	},
@@ -30,9 +30,9 @@ const fields = [
 		label: 'Password',
 		helperText: `Password must be at least ${password.minLength} characters long`,
 		children: renderInput({
-			// autocomplete: 'new-password',
-			// minLength: password.minLength as number,
-			// maxLength: 100,
+			autocomplete: 'new-password',
+			minLength: password.minLength as number,
+			maxLength: 100,
 			required: true,
 		}),
 	},
@@ -48,7 +48,6 @@ export const Auth = (props: AuthProps) => {
 
 	return (
 		<Modal.Root>
-			<Modal.Trigger>TEMPORARY REMOVE ME</Modal.Trigger>
 			<Modal.Window closedby="any">
 				<form onSubmit={submit}>
 					<h1>New high score!</h1>
