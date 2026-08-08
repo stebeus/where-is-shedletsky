@@ -5,7 +5,8 @@
 		"build": "turbo run build",
 		"check-types": "turbo run check-types",
 		"dev": "turbo run dev",
-		"lint": "biome check --fix --reporter=concise"
+		"lint": "biome check --fix --reporter=concise",
+		"test": "turbo run test"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.7",
