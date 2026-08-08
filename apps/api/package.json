@@ -22,6 +22,7 @@
 		"@hono/standard-validator": "^0.4.0",
 		"@repo/contracts": "workspace:*",
 		"@repo/env": "workspace:*",
+		"@repo/errors": "workspace:*",
 		"drizzle-orm": "1.0.0-rc.4",
 		"hono": "^4.13.0",
 		"postgres": "^3.4.9",
@@ -29,7 +30,7 @@
 	},
 	"devDependencies": {
 		"@repo/typescript-config": "workspace:*",
-		"@types/node": "^26.1.2",
+		"@types/node": "catalog:",
 		"drizzle-kit": "1.0.0-rc.4",
 		"typescript": "catalog:",
 		"vitest": "catalog:"

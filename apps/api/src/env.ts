@@ -3,13 +3,13 @@ import process from 'node:process';
 import * as z from 'zod';
 
 import { createEnv } from '@repo/env';
-
-import { isErrnoException } from './utils/index.ts';
+import { catchErrnoException } from '@repo/errors';
 
 try {
 	process.loadEnvFile();
 } catch (error) {
-	if (isErrnoException(error) && error.code !== 'ENOENT') throw error;
+	const caught = catchErrnoException(error);
+	if (caught.code !== 'ENOENT') throw caught;
 }
 
 const dbUrlRegex = /(postgres(?:ql)?):\/\/(?:([^@\s]+)@)?([^/\s]+)(?:\/(\w+))?(?:\?(.+))?/;

@@ -205,6 +205,9 @@ settings:
 
 catalogs:
   default:
+    '@types/node':
+      specifier: ^26.1.2
+      version: 26.1.2
     typescript:
       specifier: ^7.0.2
       version: 7.0.2
@@ -240,6 +243,9 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
       drizzle-orm:
         specifier: 1.0.0-rc.4
         version: 1.0.0-rc.4(postgres@3.4.9)(zod@4.4.3)
@@ -277,6 +283,9 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
       lucide-solid:
         specifier: ^1.28.0
         version: 1.28.0(solid-js@1.9.14)
@@ -331,6 +340,21 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.10(@types/node@26.1.2)(@vitest/browser-playwright@4.1.10)(vite@8.2.0(@types/node@26.1.2)(jiti@2.7.0))
+
+  packages/errors:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.1.2
       typescript:
         specifier: 'catalog:'
         version: 7.0.2

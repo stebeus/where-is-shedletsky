@@ -1,2 +1,0 @@
-export const isErrnoException = (error: unknown): error is NodeJS.ErrnoException =>
-	error instanceof Error;
