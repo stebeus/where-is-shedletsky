@@ -8,4 +8,4 @@ export const authSchema = z.object({
 	bestTime: z.coerce.number().int().positive().transform(formatMilliseconds),
 });
 
-export type GetUserRequest = Omit<User, 'password'>;
+export type GetUserResponse = Omit<User, 'password'>;
