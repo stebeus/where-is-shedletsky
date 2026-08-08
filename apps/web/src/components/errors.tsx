@@ -12,7 +12,7 @@ const ErrorFallback = (props: ErrorFallbackProps) => (
 	<>
 		<h1>Oops - you've reached this page in error</h1>
 		<p>
-			{FetchError.isInstance(props.error) && `${props.error.status} `}
+			{FetchError.isFetchError(props.error) && `${props.error.status} `}
 			{props.error.message}
 		</p>
 		<img src={errorImage} alt="Noob poking a bomb with a stick" width={280} height={280} />
