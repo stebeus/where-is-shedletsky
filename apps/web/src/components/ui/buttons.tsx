@@ -1,6 +1,6 @@
 import { createUniqueId, type JSX, mergeProps } from 'solid-js';
 
-import { createSafeContext } from '#primitives/context.tsx';
+import { createSafeContext } from '#primitives/index.ts';
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
