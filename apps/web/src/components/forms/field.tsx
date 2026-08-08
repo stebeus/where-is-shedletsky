@@ -1,4 +1,6 @@
-import { type Accessor, createUniqueId, type JSX } from 'solid-js';
+import type { RenderProps } from '#types.ts';
+
+import { type Accessor, createUniqueId } from 'solid-js';
 
 import { toCamelCase } from '#utils/index.ts';
 
@@ -10,7 +12,7 @@ export type FieldRenderProps = {
 type FieldProps = {
 	label: string;
 	helperText?: string;
-	children: (props: FieldRenderProps) => JSX.Element;
+	children: RenderProps<FieldRenderProps>;
 };
 
 const Field = (props: FieldProps) => {
