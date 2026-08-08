@@ -2,6 +2,8 @@ import process from 'node:process';
 
 import * as z from 'zod';
 
+import { createEnv } from '@repo/env';
+
 import { isErrnoException } from './utils/errors.ts';
 
 try {
@@ -12,14 +14,8 @@ try {
 
 const dbUrlRegex = /(postgres(?:ql)?):\/\/(?:([^@\s]+)@)?([^/\s]+)(?:\/(\w+))?(?:\?(.+))?/;
 
-const envSchema = z.object({
+export const env = createEnv(process.env, {
 	CLIENT_URL: z.url().default('*'),
 	DATABASE_URL: z.url().regex(dbUrlRegex),
 	PORT: z.coerce.number().int().positive().default(3000),
 });
-
-const { success, error, data } = z.safeParse(envSchema, process.env);
-
-if (!success) throw new Error(z.prettifyError(error));
-
-export const env = data;
