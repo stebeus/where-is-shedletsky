@@ -18,8 +18,8 @@ describe('GET /characters/:name/position/:position', () => {
 	describe('Given invalid payloads,', () => {
 		it.for`
 			case            | name          | position
-			${'empty'}      | ${null}       | ${null}
-			${'incomplete'} | ${'john_doe'} | ${null}
+			${'empty'}      | ${undefined}  | ${undefined}
+			${'incomplete'} | ${'john_doe'} | ${undefined}
 			${'invalid'}    | ${'john_doe'} | ${'john_doe'}
 		`('rejects requests with $case parameters', async ({ name, position }) => {
 			const res = await app.request(`${URL}/${name}/position/${position}`);

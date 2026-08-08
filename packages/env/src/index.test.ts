@@ -12,7 +12,7 @@ describe('createEnv', () => {
 	describe('Given invalid environment variables,', () => {
 		it.for`
 			case            | mockEnv
-			${'empty'}      | ${null}
+			${'empty'}      | ${undefined}
 			${'incomplete'} | ${{ environment: 'test' }}
 			${'invalid'}    | ${{ environment: 'test', port: 'three thousand' }}
 		`('throws on $case variables', ({ mockEnv }) => {

@@ -40,7 +40,7 @@ describe('POST /users/sign-up', () => {
 	describe('Given invalid payloads,', () => {
 		it.for`
 			case            | body
-			${'empty'}      | ${null}
+			${'empty'}      | ${undefined}
 			${'incomplete'} | ${createUser('jane_doe', '12345678')}
 			${'invalid'}    | ${createUser('jane_doe', '12345678', 'jane_doe')}
 		`('rejects requests with $case bodies', async ({ body }) => {
@@ -80,7 +80,7 @@ describe('POST /users/sign-in', () => {
 	describe('Given invalid payloads,', () => {
 		it.for`
 			case            | body
-			${'empty'}      | ${null}
+			${'empty'}      | ${undefined}
 			${'incomplete'} | ${createUser('john_doe', '12345678')}
 			${'invalid'}    | ${createUser('john_doe', '12345678', 'john_doe')}
 		`('rejects requests with $case bodies', async ({ body }) => {
