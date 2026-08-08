@@ -4,7 +4,7 @@ import * as z from 'zod';
 
 import { createEnv } from '@repo/env';
 
-import { isErrnoException } from './utils/errors.ts';
+import { isErrnoException } from './utils/index.ts';
 
 try {
 	process.loadEnvFile();
