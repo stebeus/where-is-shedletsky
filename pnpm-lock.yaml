@@ -263,7 +263,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/node':
-        specifier: ^26.1.2
+        specifier: 'catalog:'
         version: 26.1.2
       drizzle-kit:
         specifier: 1.0.0-rc.4
