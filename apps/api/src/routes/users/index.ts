@@ -11,14 +11,14 @@ export const users = new Hono();
 
 users.get('/', async (c) => c.json({ data: await findMany() }));
 
-users.post('/sign-up', validate('form', authSchema), async (c) => {
-	const form = c.req.valid('form');
-	const data = await signUp(form);
+users.post('/sign-up', validate('json', authSchema), async (c) => {
+	const newUser = c.req.valid('json');
+	const data = await signUp(newUser);
 	return c.json({ data }, 201);
 });
 
-users.post('/sign-in', validate('form', authSchema), async (c) => {
-	const form = c.req.valid('form');
-	const data = await signIn(form);
+users.post('/sign-in', validate('json', authSchema), async (c) => {
+	const newUser = c.req.valid('json');
+	const data = await signIn(newUser);
 	return c.json({ data }, 201);
 });

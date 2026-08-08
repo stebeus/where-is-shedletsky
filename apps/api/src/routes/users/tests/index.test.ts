@@ -1,6 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import { app } from '#app.ts';
+import { postJson } from '#utils/index.ts';
 
 const URL = '/api/v1/users';
 
@@ -15,7 +16,7 @@ describe('GET /users', () => {
 });
 
 const createUser = (username = '', password = '', bestTime = '') =>
-	new URLSearchParams({ username, password, bestTime });
+	({ username, password, bestTime }) as const;
 
 const generateUsername = (username = 'john_doe') =>
 	`${username}${Temporal.Now.instant().epochNanoseconds}`;
@@ -29,7 +30,7 @@ const generateBestTime = () => {
 beforeAll(async () => {
 	try {
 		const body = createUser('john_doe', '12345678', generateBestTime());
-		await app.request(`${URL}/sign-up`, { method: 'POST', body });
+		await postJson(app, `${URL}/sign-up`, body);
 	} catch {}
 });
 
@@ -43,7 +44,7 @@ describe('POST /users/sign-up', () => {
 			${'incomplete'} | ${createUser('jane_doe', '12345678')}
 			${'invalid'}    | ${createUser('jane_doe', '12345678', 'jane_doe')}
 		`('rejects requests with $case bodies', async ({ body }) => {
-			const res = await app.request(signupUrl, { method: 'POST', body });
+			const res = await postJson(app, signupUrl, body);
 			expect(res.status).toBe(400);
 		});
 	});
@@ -53,7 +54,7 @@ describe('POST /users/sign-up', () => {
 		const body = createUser('john_doe', '12345678', generateBestTime());
 
 		// Act
-		const res = await app.request(signupUrl, { method: 'POST', body });
+		const res = await postJson(app, signupUrl, body);
 
 		// Assert
 		expect(res.status).toBe(409);
@@ -64,7 +65,7 @@ describe('POST /users/sign-up', () => {
 		const body = createUser(generateUsername(), '12345678', generateBestTime());
 
 		// Act
-		const res = await app.request(signupUrl, { method: 'POST', body });
+		const res = await postJson(app, signupUrl, body);
 		const { data } = await res.json();
 
 		// Assert
@@ -83,7 +84,7 @@ describe('POST /users/sign-in', () => {
 			${'incomplete'} | ${createUser('john_doe', '12345678')}
 			${'invalid'}    | ${createUser('john_doe', '12345678', 'john_doe')}
 		`('rejects requests with $case bodies', async ({ body }) => {
-			const res = await app.request(signinUrl, { method: 'POST', body });
+			const res = await postJson(app, signinUrl, body);
 			expect(res.status).toBe(400);
 		});
 	});
@@ -94,7 +95,7 @@ describe('POST /users/sign-in', () => {
 			${'nonexistent users'}   | ${createUser('john_smith', '12345678', generateBestTime())}
 			${'incorrect passwords'} | ${createUser('john_doe', 'abcdefgh', generateBestTime())}
 		`('forbids $case', async ({ body }) => {
-			const res = await app.request(signinUrl, { method: 'POST', body });
+			const res = await postJson(app, signinUrl, body);
 			expect(res.status).toBe(401);
 		});
 	});
@@ -104,7 +105,7 @@ describe('POST /users/sign-in', () => {
 		const body = createUser('john_doe', '12345678', generateBestTime());
 
 		// Act
-		const res = await app.request(signinUrl, { method: 'POST', body });
+		const res = await postJson(app, signinUrl, body);
 		const { data } = await res.json();
 
 		// Assert
