@@ -27,6 +27,8 @@ export const fetchData = async <Data>(url: string, options?: RequestInit): Promi
 	return result;
 };
 
+export type Fetcher = typeof fetchData;
+
 export const fetchInternalData = async <Data>(endpoint: string, options?: RequestInit) => {
 	type InternalData = {
 		data: Data;
