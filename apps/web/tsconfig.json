@@ -7,8 +7,7 @@
 		"types": ["vite/client"],
 
 		/* Bundling */
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
+		"jsx": "react-jsx",
 		"moduleDetection": "force",
 		"moduleResolution": "bundler"
 	},
