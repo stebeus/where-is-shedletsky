@@ -1,6 +1,6 @@
-import type { RenderProps } from '#types.ts';
+import type { RenderProps } from '#types/ui.ts';
 
-import { type Accessor, createUniqueId } from 'solid-js';
+import { useId } from 'react';
 
 import { toCamelCase } from '#utils/index.ts';
 
@@ -15,18 +15,18 @@ type FieldProps = {
 	children: RenderProps<FieldRenderProps>;
 };
 
-const Field = (props: FieldProps) => {
-	const name = toCamelCase(props.label);
-	const helperTextId = props.helperText == null ? undefined : createUniqueId();
+const Field = ({ label, helperText, children }: FieldProps) => {
+	const name = toCamelCase(label);
+	const helperTextId = useId();
 
 	return (
 		// biome-ignore lint/a11y/noLabelWithoutControl: the children are form controls
 		<label>
-			<span>{props.label}</span>
-			{props.children({ name, helperTextId })}
-			{props.helperText != null && <span id={helperTextId}>{props.helperText}</span>}
+			<span>{label}</span>
+			{children({ name, helperTextId: helperText == null ? undefined : helperTextId })}
+			{helperText != null && <span id={helperTextId}>{helperText}</span>}
 		</label>
 	);
 };
 
-export const renderField = (props: Accessor<FieldProps>) => <Field {...props()} />;
+export const renderField = (props: FieldProps) => <Field {...props} />;

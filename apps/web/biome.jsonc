@@ -2,9 +2,6 @@
 	"$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
 	"extends": "//",
 	"linter": {
-		"domains": {
-			"solid": "all"
-		},
 		"rules": {
 			"correctness": {
 				"noNestedComponentDefinitions": "on"

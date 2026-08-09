@@ -1,14 +1,12 @@
+import type { InputHTMLAttributes } from 'react';
 import type { FieldRenderProps } from './field.tsx';
 
-import { type JSX, mergeProps } from 'solid-js';
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-type InputProps = JSX.InputHTMLAttributes<HTMLInputElement>;
+export const Input = ({ type = 'text', ...props }: InputProps) => <input type={type} {...props} />;
 
-export const Input = (props: InputProps) => {
-	const merged = mergeProps({ type: 'text' }, props);
-	return <input {...merged} />;
-};
-
-export const renderInput = (inputProps: InputProps) => (fieldProps: FieldRenderProps) => (
-	<Input name={fieldProps.name} aria-describedby={fieldProps.helperTextId} {...inputProps} />
-);
+export const renderInput =
+	(inputProps: InputProps) =>
+	({ name, helperTextId }: FieldRenderProps) => (
+		<Input name={name} aria-describedby={helperTextId} {...inputProps} />
+	);

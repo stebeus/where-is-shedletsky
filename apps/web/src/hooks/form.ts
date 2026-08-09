@@ -1,15 +1,8 @@
-import { type Accessor, createSignal } from 'solid-js';
+import { type SubmitEvent, useState } from 'react';
 
 import { catchError } from '@repo/errors';
 
-import {
-	access,
-	FetchError,
-	type Fetcher,
-	fetchData,
-	fetchInternalData,
-	type PseudoAccessor,
-} from '#utils/index.ts';
+import { FetchError, type Fetcher, fetchData, fetchInternalData } from '#utils/index.ts';
 
 type HttpMethod =
 	| 'GET'
@@ -29,26 +22,22 @@ type FormOptions = Partial<{
 }>;
 
 type Form = Readonly<{
-	error: Accessor<Error | FetchError | undefined>;
-	submit: (event: Event) => Promise<void>;
+	error: Error | FetchError | undefined;
+	submit: (event: SubmitEvent) => Promise<void>;
 }>;
 
-type FormPrimitive = (
-	url: PseudoAccessor<string>,
-	onAction: () => void,
-	options?: FormOptions,
-) => Form;
+type FormHook = (url: string, onAction: () => void, options?: FormOptions) => Form;
 
 const isHtmlFormElement = (target: EventTarget) => target instanceof HTMLFormElement;
 
-export const createForm: FormPrimitive = (
+export const useForm: FormHook = (
 	url,
 	onAction,
 	{ fetcher = fetchData, metadata, method = 'POST' } = {},
 ) => {
-	const [error, setError] = createSignal<Error | FetchError>();
+	const [error, setError] = useState<Error | FetchError>();
 
-	const submit = async (event: Event) => {
+	const submit = async (event: SubmitEvent) => {
 		event.preventDefault();
 
 		const { target } = event;
@@ -58,10 +47,8 @@ export const createForm: FormPrimitive = (
 		const entries = Object.fromEntries(formData);
 		const newEntries = { ...entries, ...metadata };
 
-		const urlAccessor = access(url);
-
 		try {
-			await fetcher(urlAccessor, {
+			await fetcher(url, {
 				method,
 				headers: { 'content-type': 'application/json' },
 				body: JSON.stringify(newEntries),
@@ -78,5 +65,5 @@ export const createForm: FormPrimitive = (
 	return { error, submit } as const;
 };
 
-export const makeInternalForm: FormPrimitive = (url, onAction, options) =>
-	createForm(url, onAction, { fetcher: fetchInternalData, ...options });
+export const useInternalForm: FormHook = (url, onAction, options) =>
+	useForm(url, onAction, { fetcher: fetchInternalData, ...options });

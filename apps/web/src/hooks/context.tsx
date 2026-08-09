@@ -1,21 +1,21 @@
-import { createContext, type JSX, useContext } from 'solid-js';
+import { createContext, type ReactNode, use } from 'react';
 
 type ProviderProps = Record<string, unknown> & {
-	children?: JSX.Element;
+	children?: ReactNode;
 };
 
 export const createSafeContext = <ContextValue, Props extends ProviderProps>(
 	name: Capitalize<string>,
 	valueFactory: (props: Props) => ContextValue,
 ) => {
-	const Context = createContext<ContextValue>();
+	const Context = createContext<ContextValue | undefined>(undefined);
 
-	const Provider = (props: Props & { children: JSX.Element }) => (
-		<Context.Provider value={valueFactory(props)}>{props.children}</Context.Provider>
+	const Provider = (props: Props & { children: ReactNode }) => (
+		<Context value={valueFactory(props)}>{props.children}</Context>
 	);
 
 	const useSafeContext = () => {
-		const SafeContext = useContext(Context);
+		const SafeContext = use(Context);
 
 		if (SafeContext == null) {
 			throw new Error(`${name}Context must be used within a <${name}Provider>`);
