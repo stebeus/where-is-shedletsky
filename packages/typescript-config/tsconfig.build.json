@@ -14,5 +14,10 @@
 		"composite": true
 	},
 	"include": ["${configDir}/src"],
-	"exclude": ["${configDir}/dist", "${configDir}/node_modules"]
+	"exclude": [
+		"${configDir}/dist",
+		"${configDir}/node_modules",
+		"${configDir}/**/*.test.ts",
+		"${configDir}/**/*.test.tsx"
+	]
 }

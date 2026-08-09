@@ -1,6 +1,4 @@
 {
-	"extends": "@repo/typescript-config/tsconfig.lib",
-	"compilerOptions": {
-		"types": ["node"]
-	}
+	"files": [],
+	"references": [{ "path": "./tsconfig.base.json" }, { "path": "./tsconfig.build.json" }]
 }
