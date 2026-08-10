@@ -14,7 +14,7 @@ export class FetchError extends Error {
 		this.#res = res;
 	}
 
-	async toJson() {
+	async toJson<ErrorResponse>(): Promise<ErrorResponse> {
 		return await this.#res.json();
 	}
 }
