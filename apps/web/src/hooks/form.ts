@@ -21,12 +21,34 @@ type FormOptions = Partial<{
 	method: HttpMethod;
 }>;
 
+type FieldErrors = [string, ...string[]];
+
+type FormErrorResponse = Readonly<{
+	formErrors: string[];
+	fieldErrors: Record<string, FieldErrors>;
+}>;
+
+export type FormError = FetchError<FormErrorResponse>;
+
 type Form = Readonly<{
-	error: Error | FetchError | undefined;
+	error?: Error | FormError;
 	submit: (event: SubmitEvent) => Promise<void>;
 }>;
 
 type FormHook = (url: string, onAction: () => void, options?: FormOptions) => Form;
+
+export const getFormErrors = (error: Error | FormError) => {
+	console.log(error);
+
+	const isFormError = (error: unknown): error is FormError =>
+		FetchError.isFetchError(error) && error.status === 400;
+
+	const getFieldError = ([message]: FieldErrors) => message;
+
+	return isFormError(error) && error.payload?.fieldErrors != null
+		? Object.values(error.payload.fieldErrors).map(getFieldError)
+		: [error.message];
+};
 
 const isHtmlFormElement = (target: EventTarget) => target instanceof HTMLFormElement;
 
@@ -35,7 +57,7 @@ export const useForm: FormHook = (
 	onAction,
 	{ fetcher = fetchData, metadata, method = 'POST' } = {},
 ) => {
-	const [error, setError] = useState<Error | FetchError>();
+	const [error, setError] = useState<Error | FormError>();
 
 	const submit = async (event: SubmitEvent) => {
 		event.preventDefault();
