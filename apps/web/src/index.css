@@ -8,5 +8,10 @@
 
 	button {
 		background-color: transparent;
+		border: none;
+
+		&:is([disabled]) {
+			border: 5px solid lime;
+		}
 	}
 }
