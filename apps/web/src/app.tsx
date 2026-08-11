@@ -41,7 +41,7 @@ export const App = () => {
 	const restart = () => {
 		setCharacters(characters.map(createCharacter));
 		setTimer(0);
-		setCanTick(false);
+		setCanTick(true);
 	};
 
 	const timeout = canTick ? 10 : undefined;
