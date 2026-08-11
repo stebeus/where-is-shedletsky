@@ -34,12 +34,16 @@ export const InvokerButton = ({ children, ...props }: ButtonProps) => {
 	);
 };
 
-export const PopoverTrigger = ({ children }: ButtonProps) => (
-	<InvokerButton command="toggle-popover">{children}</InvokerButton>
+export const PopoverTrigger = ({ children, ...props }: ButtonProps) => (
+	<InvokerButton command="toggle-popover" {...props}>
+		{children}
+	</InvokerButton>
 );
 
-export const PopoverClose = ({ children }: ButtonProps) => (
-	<InvokerButton command="hide-popover">{children}</InvokerButton>
+export const PopoverClose = ({ children, ...props }: ButtonProps) => (
+	<InvokerButton command="hide-popover" {...props}>
+		{children}
+	</InvokerButton>
 );
 
 export const SubmitButton = ({ children, onClick }: ButtonProps) => (
