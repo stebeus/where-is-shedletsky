@@ -42,7 +42,7 @@ describe('POST /users/sign-up', () => {
 			case            | body
 			${'empty'}      | ${undefined}
 			${'incomplete'} | ${createUser('jane_doe', '12345678')}
-			${'invalid'}    | ${createUser('jane_doe', '12345678', 'jane_doe')}
+			${'incorrect'}  | ${createUser('jane_doe', '12345678', 'jane_doe')}
 		`('rejects requests with $case bodies', async ({ body }) => {
 			const res = await postJson(app, signupUrl, body);
 			expect(res.status).toBe(400);

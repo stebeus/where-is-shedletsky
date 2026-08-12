@@ -20,7 +20,7 @@ describe('GET /characters/:name/position/:position', () => {
 			case            | name          | position
 			${'empty'}      | ${undefined}  | ${undefined}
 			${'incomplete'} | ${'john_doe'} | ${undefined}
-			${'invalid'}    | ${'john_doe'} | ${'john_doe'}
+			${'incorrect'}  | ${'john_doe'} | ${'john_doe'}
 		`('rejects requests with $case parameters', async ({ name, position }) => {
 			const res = await app.request(`${URL}/${name}/position/${position}`);
 			expect(res.status).toBe(400);
