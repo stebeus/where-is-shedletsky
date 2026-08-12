@@ -24,7 +24,7 @@
 		"@repo/env": "workspace:*",
 		"@repo/errors": "workspace:*",
 		"drizzle-orm": "1.0.0-rc.4",
-		"hono": "^4.13.0",
+		"hono": "^4.13.1",
 		"postgres": "^3.4.9",
 		"zod": "catalog:"
 	},
