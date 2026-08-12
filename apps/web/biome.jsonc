@@ -19,7 +19,8 @@
 			},
 			"suspicious": {
 				"noDuplicatedSpreadProps": "on",
-				"noLeakedRender": "on"
+				"noLeakedRender": "on",
+				"noReactForwardRef": "on"
 			}
 		}
 	},
