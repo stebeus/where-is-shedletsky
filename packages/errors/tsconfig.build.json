@@ -1,6 +1,3 @@
 {
-	"extends": "@repo/typescript-config/tsconfig.build",
-	"compilerOptions": {
-		"types": ["node"]
-	}
+	"extends": "@repo/typescript-config/tsconfig.build"
 }

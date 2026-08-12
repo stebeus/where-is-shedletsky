@@ -3,48 +3,32 @@ import { describe, expect, it } from 'vitest';
 import { catchError } from './index.js';
 
 describe('catchError', () => {
-	describe('Given non-errors,', () => {
-		describe.for`
-			case         | value
-			${'numbers'} | ${0}
-			${'strings'} | ${'string'}
-			${'objects'} | ${{ key: 'value' }}
-		`('When they are $case,', ({ value }) => {
+	describe.for`
+		case         | value               | expected
+		${'numbers'} | ${0}                | ${'0'}
+		${'strings'} | ${'string'}         | ${'"string"'}
+		${'bigints'} | ${1n}               | ${'[Non-serializable value]'}
+		${'objects'} | ${{ key: 'value' }} | ${'{\n\t"key": "value"\n}'}
+	`('Given $case', ({ value, expected }) => {
+		it('creates errors for them', () => {
 			const caught = catchError(value);
-
-			it('creates an error from them', () => {
-				expect(caught).toBeInstanceOf(Error);
-			});
-
-			it('describes them', () => {
-				expect(caught.message).toBe(`Unexpected throw: ${JSON.stringify(value, undefined, '\t')}`);
-			});
-		});
-
-		describe('When they are bigints,', () => {
-			const value = 1n;
-			const caught = catchError(value);
-
-			it('creates an error from them', () => {
-				expect(caught).toBeInstanceOf(Error);
-			});
-
-			it('describes them', () => {
-				expect(caught.message).toBe(`Unexpected throw: [Unable to stringify ${typeof value}]`);
-			});
-		});
-	});
-
-	describe('Given errors,', () => {
-		const value = new Error('error');
-		const caught = catchError(value);
-
-		it('preserves their constructor', () => {
 			expect(caught).toBeInstanceOf(Error);
 		});
 
-		it('preserves their message', () => {
-			expect(caught.message).toBe('error');
+		it('describes them as unexpected throws', () => {
+			const { message } = catchError(value);
+			expect(message).toBe(`Unexpected throw: ${expected}`);
 		});
+	});
+
+	it('preserves errors', () => {
+		// Arrange
+		const error = new Error();
+
+		// Act
+		const caught = catchError(error);
+
+		// Assert
+		expect(caught).toBe(error);
 	});
 });
