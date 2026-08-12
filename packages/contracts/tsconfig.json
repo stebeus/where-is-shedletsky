@@ -1,4 +1,3 @@
 {
-	"files": [],
-	"references": [{ "path": "./tsconfig.base.json" }, { "path": "./tsconfig.build.json" }]
+	"extends": "@repo/typescript-config/tsconfig.base"
 }
