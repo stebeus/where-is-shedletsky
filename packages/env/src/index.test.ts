@@ -3,19 +3,19 @@ import * as z from 'zod';
 
 import { createEnv } from './index.js';
 
-describe('createEnv', () => {
-	const schema = {
-		environment: z.string(),
-		port: z.coerce.number(),
-	};
+const schema = {
+	environment: z.string(),
+	port: z.coerce.number(),
+};
 
-	describe('Given invalid environment variables,', () => {
+describe('createEnv', () => {
+	describe('Given invalid environment variables', () => {
 		it.for`
 			case            | mockEnv
 			${'empty'}      | ${undefined}
 			${'incomplete'} | ${{ environment: 'test' }}
-			${'invalid'}    | ${{ environment: 'test', port: 'three thousand' }}
-		`('throws on $case variables', ({ mockEnv }) => {
+			${'incorrect'}  | ${{ environment: 'test', port: 'three thousand' }}
+		`('throws when they are $case', ({ mockEnv }) => {
 			expect(() => createEnv(mockEnv, schema)).toThrow();
 		});
 	});
