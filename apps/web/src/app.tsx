@@ -1,31 +1,24 @@
-import type { Character } from '@repo/contracts/characters';
-import type { CharacterState } from './types/game.ts';
+import { Suspense, use, useEffect, useRef, useState } from 'react';
 
-import { useEffect, useRef, useState } from 'react';
-
-import { fetchInternalData } from '#utils/index.ts';
-
-import { Footer, Header } from './components/index.ts';
-import { Button, InvokerProvider } from './components/ui/index.ts';
+import { ErrorBoundary, Footer, Header } from './components/index.ts';
+import { Button, Duration, InvokerProvider, Loader } from './components/ui/index.ts';
 import { Auth, Leaderboard, Success, Welcome } from './features/dialogs/index.ts';
-import { CharactersPopover, Photograph } from './features/game/index.ts';
-import { useTimer } from './hooks/index.ts';
+import {
+	CharactersPopover,
+	CharactersProvider,
+	type CharacterUi,
+	Photograph,
+	type Position,
+	useCharacters,
+} from './features/game/index.ts';
+import { useInterval } from './hooks/timer.ts';
 
-const createCharacter = (character: Character) => ({ ...character, wasFound: false }) as const;
+const Game = () => {
+	const { promise, isCharacterRemaining } = useCharacters();
+	const data = use(promise);
 
-const fetchCharacters = async () => {
-	const data = await fetchInternalData<Character[]>('characters');
-
-	return data.map(createCharacter);
-};
-
-const data = await fetchCharacters();
-
-const isCharacterRemaining = ({ wasFound }: CharacterState) => !wasFound;
-
-export const App = () => {
-	const [characters, setCharacters] = useState<CharacterState[]>(data);
-	const [position, setPosition] = useState<`${number},${number}`>();
+	const [characters, setCharacters] = useState<CharacterUi[]>(data);
+	const [position, setPosition] = useState<Position>('0,0');
 
 	const [canTick, setCanTick] = useState(false);
 	const [timer, setTimer] = useState(0);
@@ -33,51 +26,60 @@ export const App = () => {
 	const authRef = useRef<HTMLDialogElement>(null);
 	const successRef = useRef<HTMLDialogElement>(null);
 
+	const remainingCharacters = characters?.filter(isCharacterRemaining);
+
+	const restart = () => {
+		setCharacters(data);
+		setTimer(0);
+		setCanTick(true);
+	};
+
 	const openSuccess = () => {
 		authRef.current?.close();
 		successRef.current?.showPopover();
 	};
 
-	const restart = () => {
-		setCharacters(characters.map(createCharacter));
-		setTimer(0);
-		setCanTick(true);
-	};
-
-	const timeout = canTick ? 10 : undefined;
-	useTimer(setInterval, () => setTimer(timer + 1), timeout);
-
-	const remainingCharacters = characters?.filter(isCharacterRemaining);
+	const centisecondDelay = 10;
+	const timeout = canTick ? centisecondDelay : undefined;
+	useInterval(() => setTimer(timer + centisecondDelay), timeout);
 
 	useEffect(() => {
-		console.log(characters);
-
-		if (remainingCharacters?.length < 1 && canTick) {
-			setCanTick(false);
-			authRef.current?.showModal();
-		}
-	}, [remainingCharacters, canTick, characters]);
+		if (remainingCharacters.length > 0) return;
+		setCanTick(false);
+		authRef.current?.showModal();
+	}, [remainingCharacters]);
 
 	return (
 		<>
 			<Header />
 			<main>
-				<time dateTime={timer.toString()}>{timer}</time>
+				<Duration milliseconds={timer} />
+				<p aria-live="polite">{remainingCharacters.length} characters remaining</p>
 				<Button onClick={restart}>Restart</Button>
 				<Leaderboard />
 				<InvokerProvider>
 					<Photograph characters={characters} positionSetter={setPosition} />
 					<CharactersPopover
 						characters={remainingCharacters}
-						position={position!}
+						position={position}
 						charactersSetter={setCharacters}
 					/>
 				</InvokerProvider>
 			</main>
 			<Footer />
-			<Welcome onClose={() => setCanTick(true)} />
-			<Auth bestTime={timer} ref={authRef} onAction={openSuccess} />
+			<Welcome characters={characters} onClose={() => setCanTick(true)} />
+			<Auth bestTime={timer} onAction={openSuccess} ref={authRef} />
 			<Success ref={successRef} />
 		</>
 	);
 };
+
+export const App = () => (
+	<CharactersProvider>
+		<ErrorBoundary>
+			<Suspense fallback={<Loader />}>
+				<Game />
+			</Suspense>
+		</ErrorBoundary>
+	</CharactersProvider>
+);
