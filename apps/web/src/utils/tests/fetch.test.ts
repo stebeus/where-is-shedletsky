@@ -9,8 +9,7 @@ describe('FetchError.isFetchError', () => {
 	});
 
 	it('confirms that it is a fetch error', () => {
-		const res = new Response();
-		const error = new FetchError(res);
+		const error = new FetchError({ status: 500, message: 'Internal Server Error' });
 		expect(FetchError.isFetchError(error)).toBeTruthy();
 	});
 });
