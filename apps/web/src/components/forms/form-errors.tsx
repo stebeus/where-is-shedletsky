@@ -1,7 +1,7 @@
-import { type FormError, getFormErrors } from '#hooks/index.ts';
+import { getFormErrors } from '#hooks/form.ts';
 
 type FormErrorsProps = {
-	error: Error | FormError;
+	error: Error;
 };
 
 const renderFormError = (message: string) => <li key={crypto.randomUUID()}>{message}</li>;

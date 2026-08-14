@@ -1,7 +1,7 @@
-import type { InputHTMLAttributes } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import type { FieldRenderProps } from './field.tsx';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
+type InputProps = ComponentPropsWithoutRef<'input'>;
 
 export const Input = ({ type = 'text', ...props }: InputProps) => <input type={type} {...props} />;
 

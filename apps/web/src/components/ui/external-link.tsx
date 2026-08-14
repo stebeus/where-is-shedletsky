@@ -1,9 +1,7 @@
-import type { AnchorHTMLAttributes } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
+type ExternalLinkProps = ComponentPropsWithoutRef<'a'>;
 
-export const ExternalLink = ({ children, ...props }: ExternalLinkProps) => (
-	<a target="_blank" rel="noopener noreferrer" {...props}>
-		{children}
-	</a>
+export const ExternalLink = (props: ExternalLinkProps) => (
+	<a target="_blank" rel="noopener noreferrer" {...props} />
 );

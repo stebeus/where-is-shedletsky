@@ -1,4 +1,4 @@
-import type { DialogHTMLAttributes, Ref } from 'react';
+import type { ComponentProps } from 'react';
 
 import {
 	type ButtonProps,
@@ -9,25 +9,14 @@ import {
 	useInvoker,
 } from './ui/index.ts';
 
-type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
-	ref?: Ref<HTMLDialogElement>;
-};
+export type DialogProps = ComponentProps<'dialog'>;
 
-const ModalWindow = ({ children, ...props }: DialogProps) => {
+const ModalWindow = (props: DialogProps) => {
 	const { id } = useInvoker();
-
-	return (
-		<dialog id={id} {...props}>
-			{children}
-		</dialog>
-	);
+	return <dialog id={id} {...props} />;
 };
 
-const DialogWindow = ({ children, ...props }: DialogProps) => (
-	<ModalWindow popover="auto" {...props}>
-		{children}
-	</ModalWindow>
-);
+const DialogWindow = (props: DialogProps) => <ModalWindow popover="auto" {...props} />;
 
 const ModalTrigger = ({ children }: ButtonProps) => (
 	<InvokerButton command="show-modal">{children}</InvokerButton>

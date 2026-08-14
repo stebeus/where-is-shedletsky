@@ -2,7 +2,7 @@ import type { RenderProps } from '#types/ui.ts';
 
 import { useId } from 'react';
 
-import { toCamelCase } from '#utils/index.ts';
+import { toCamelCase } from '#utils/formatters.ts';
 
 export type FieldRenderProps = {
 	name: string;
