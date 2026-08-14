@@ -1,10 +1,6 @@
-import type { RefObject } from 'react';
+import { Dialog, type DialogProps } from '#components/index.ts';
 
-import { Dialog } from '#components/index.ts';
-
-type SuccessProps = {
-	ref: RefObject<HTMLDialogElement | null>;
-};
+type SuccessProps = Pick<DialogProps, 'ref'>;
 
 export const Success = ({ ref }: SuccessProps) => (
 	<Dialog.Root>

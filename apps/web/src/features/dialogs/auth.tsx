@@ -1,22 +1,21 @@
-import { type ReactNode, type RefObject, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 
 import { userSchema } from '@repo/contracts/users';
 
 import { FormErrors, renderField, renderInput } from '#components/forms/index.ts';
-import { Modal } from '#components/index.ts';
-import { SubmitButton } from '#components/ui/index.ts';
-import { useInternalForm } from '#hooks/index.ts';
+import { type DialogProps, Modal } from '#components/index.ts';
+import { Duration, SubmitButton } from '#components/ui/index.ts';
+import { useForm } from '#hooks/form.ts';
 
-type AuthProps = {
+type AuthProps = Pick<DialogProps, 'ref'> & {
 	bestTime: number;
-	ref: RefObject<HTMLDialogElement | null>;
 	onAction: () => void;
 };
 
-type Endpoint = `sign-${'in' | 'up'}`;
+type AuthEndpoint = `sign-${'in' | 'up'}`;
 
 type SubmitButtonProps = {
-	endpoint: Endpoint;
+	endpoint: AuthEndpoint;
 	children: ReactNode;
 };
 
@@ -50,27 +49,23 @@ const submitButtons: SubmitButtonProps[] = [
 	{ endpoint: 'sign-up', children: 'Register' },
 ];
 
-export const Auth = ({ bestTime, ref, onAction }: AuthProps) => {
-	const [endpoint, setEndpoint] = useState<Endpoint>();
-
-	const { error, submit } = useInternalForm(`users/${endpoint}`, onAction, {
-		metadata: { bestTime },
-	});
+export const Auth = ({ bestTime, onAction, ref }: AuthProps) => {
+	const [endpoint, setEndpoint] = useState<AuthEndpoint>();
+	const { error, submit } = useForm(`users/${endpoint}`, onAction, { metadata: { bestTime } });
 
 	const renderSubmitButton = ({ endpoint, children }: SubmitButtonProps) => (
-		<SubmitButton key={crypto.randomUUID()} onClick={() => setEndpoint(endpoint)}>
+		<SubmitButton onClick={() => setEndpoint(endpoint)} key={crypto.randomUUID()}>
 			{children}
 		</SubmitButton>
 	);
 
 	return (
 		<Modal.Root>
-			<Modal.Trigger>TEST</Modal.Trigger>
-			<Modal.Window ref={ref}>
+			<Modal.Window closedby="none" ref={ref}>
 				<form onSubmit={submit}>
 					<h1>New high score!</h1>
 					<p>
-						You finished in <time dateTime={bestTime.toString()}>{bestTime}</time>.
+						You finished in <Duration milliseconds={bestTime} format={{ style: 'long' }} />.
 					</p>
 					<p>Log in or register to save your score:</p>
 					{error != null && <FormErrors error={error} />}
