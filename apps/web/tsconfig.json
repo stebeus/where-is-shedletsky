@@ -2,7 +2,7 @@
 	"extends": "@repo/typescript-config/tsconfig.app",
 	"compilerOptions": {
 		"allowArbitraryExtensions": true,
-		"lib": ["DOM", "ES2023"],
+		"lib": ["DOM", "ESNext"],
 		"target": "es2023",
 		"types": ["vite/client"],
 
