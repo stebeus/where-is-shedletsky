@@ -1,15 +1,15 @@
-import type { CharacterState } from '#types/game.ts';
+import type { CharacterUi, Position } from '#types/game.ts';
 
 import { PopoverTrigger } from '#components/ui/index.ts';
 
-type Placement = ReturnType<typeof createPlacement>;
-
 type PhotographProps = {
-	characters: CharacterState[];
-	positionSetter: (position: `${number},${number}`) => void;
+	characters: CharacterUi[];
+	positionSetter: (position: Position) => void;
 };
 
-const createPlacement = ({ description, position: { x, y }, wasFound }: CharacterState) =>
+type Placement = ReturnType<typeof createPlacement>;
+
+const createPlacement = ({ description, position: { x, y }, wasFound }: CharacterUi) =>
 	({ row: y, column: x, description, wasFound }) as const;
 
 const createGrid = (rows: number, columns: number, placements: Placement[]) => {
@@ -18,7 +18,7 @@ const createGrid = (rows: number, columns: number, placements: Placement[]) => {
 	const grid = Array.from({ length: rows }, createColumns);
 
 	for (const { row, column, description, wasFound } of placements) {
-		// @ts-expect-error
+		if (grid[row] == null) grid[row] = [];
 		grid[row][column] = { description, wasFound };
 	}
 
@@ -26,21 +26,18 @@ const createGrid = (rows: number, columns: number, placements: Placement[]) => {
 };
 
 const renderCell =
-	(row: number, positionSetter: (position: `${number},${number}`) => void) =>
-	(placement: Placement, column: number) => {
-		const { wasFound, description } = placement ?? {};
-
+	(row: number, positionSetter: (position: Position) => void) =>
+	({ description, wasFound }: Partial<CharacterUi> = {}, column: number = 0) => {
 		const ariaLabel = description != null && {
 			'aria-label': `${description}, located at row ${row} and column ${column}`,
 		};
 
-		const disabled = wasFound && { disabled: true };
 		const tabIndex = description == null && { tabIndex: -1 };
 
 		return (
 			<PopoverTrigger
+				disabled={wasFound}
 				{...ariaLabel}
-				{...disabled}
 				{...tabIndex}
 				onClick={() => positionSetter(`${row},${column}`)}
 				key={crypto.randomUUID()}
@@ -52,8 +49,7 @@ export const Photograph = ({ characters = [], positionSetter }: PhotographProps)
 	const placements = characters.map(createPlacement);
 	const grid = createGrid(19, 36, placements);
 
-	// @ts-expect-error
-	const renderRow = (_: unknown, row: number) => grid[row].map(renderCell(row, positionSetter));
+	const renderRow = (_: [][], row: number) => grid[row]?.map(renderCell(row, positionSetter));
 
 	return <div className="grid">{grid.map(renderRow)}</div>;
 };

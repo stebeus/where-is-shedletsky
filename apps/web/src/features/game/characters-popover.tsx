@@ -1,12 +1,27 @@
-import type { CharacterState } from '#types/game.ts';
+import type { CharacterUi, Position } from '#types/game.ts';
+
+import { useState } from 'react';
 
 import { PopoverClose, useInvoker } from '#components/ui/index.ts';
-import { fetchInternalData } from '#utils/index.ts';
+import { useTimeout } from '#hooks/timer.ts';
+
+import { fetchCharacter } from './helpers.ts';
+
+type ToastProps = {
+	onTimeout: () => void;
+};
 
 type CharactersPopoverProps = {
-	characters: CharacterState[];
-	position: `${number},${number}`;
-	charactersSetter: any;
+	characters: CharacterUi[];
+	position: Position;
+	charactersSetter: (
+		characters: CharacterUi[] | ((previous: CharacterUi[]) => CharacterUi[]),
+	) => void;
+};
+
+const Toast = ({ onTimeout }: ToastProps) => {
+	useTimeout(onTimeout, 3000);
+	return <p role="alert">Wrong character</p>;
 };
 
 export const CharactersPopover = ({
@@ -15,20 +30,22 @@ export const CharactersPopover = ({
 	charactersSetter,
 }: CharactersPopoverProps) => {
 	const { id } = useInvoker();
+	const [isCharacter, setIsCharacter] = useState<boolean>();
 
-	const assertCharacter = async (name: string, position: string) => {
-		const character = await fetchInternalData(`characters/${name}/position/${position}`);
-		if (character == null) return alert('Wrong character!');
+	const assertCharacter = async (name: string, position: Position) => {
+		const character = await fetchCharacter(name, position);
+		if (character == null) return setIsCharacter(false);
 
-		const updateCharacter = (character: CharacterState) =>
-			character.name === name && !character.wasFound && character != null
-				? { ...character, wasFound: true }
-				: character;
+		setIsCharacter(true);
 
-		charactersSetter((prev: CharacterState[]) => prev.map(updateCharacter));
+		const updateCharacter = (character: CharacterUi) =>
+			character.name === name ? { ...character, wasFound: true } : character;
+
+		const updateCharacters = (previous: CharacterUi[]) => previous.map(updateCharacter);
+		charactersSetter(updateCharacters);
 	};
 
-	const renderCharacter = ({ name }: CharacterState) => (
+	const renderCharacter = ({ name }: CharacterUi) => (
 		<li key={crypto.randomUUID()}>
 			<PopoverClose role="menuitem" onClick={() => assertCharacter(name, position)}>
 				{name}
@@ -37,8 +54,11 @@ export const CharactersPopover = ({
 	);
 
 	return (
-		<ul id={id} popover="auto">
-			{characters.map(renderCharacter)}
-		</ul>
+		<>
+			<ul id={id} popover="auto">
+				{characters.map(renderCharacter)}
+			</ul>
+			{isCharacter === false && <Toast onTimeout={() => setIsCharacter(undefined)} />}
+		</>
 	);
 };
