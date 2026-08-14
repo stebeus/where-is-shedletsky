@@ -1,4 +1,4 @@
-import type { CharacterUi } from '#types/game.ts';
+import type { Character } from '@repo/contracts/characters';
 
 import { useEffect, useRef } from 'react';
 
@@ -6,7 +6,7 @@ import { type DialogProps, Modal } from '#components/index.ts';
 import { env } from '#env.ts';
 
 type WelcomeProps = Pick<DialogProps, 'onClose'> & {
-	characters: CharacterUi[];
+	characters: Character[];
 };
 
 export const Welcome = ({ characters, onClose }: WelcomeProps) => {

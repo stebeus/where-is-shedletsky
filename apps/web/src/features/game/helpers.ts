@@ -1,5 +1,5 @@
 import type { Character } from '@repo/contracts/characters';
-import type { CharacterUi, Position } from '#types/game.ts';
+import type { CharacterUi, Position } from './types.ts';
 
 import { createSafeContext } from '#hooks/context.tsx';
 import { fetchData } from '#utils/fetch.ts';

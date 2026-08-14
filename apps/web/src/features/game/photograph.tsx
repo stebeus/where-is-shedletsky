@@ -1,4 +1,4 @@
-import type { CharacterUi, Position } from '#types/game.ts';
+import type { CharacterUi, Position } from './types.ts';
 
 import { PopoverTrigger } from '#components/ui/index.ts';
 
