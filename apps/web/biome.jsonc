@@ -7,7 +7,8 @@
 				"noNestedComponentDefinitions": "on"
 			},
 			"nursery": {
-				"useBaseline": "on"
+				"useBaseline": "on",
+				"useSortedClasses": "on"
 			},
 			"style": {
 				"noHexColors": "on",
@@ -27,6 +28,9 @@
 	"css": {
 		"formatter": {
 			"quoteStyle": "single"
+		},
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"html": {

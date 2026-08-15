@@ -16,10 +16,11 @@
 		"@repo/contracts": "workspace:*",
 		"@repo/env": "workspace:*",
 		"@repo/errors": "workspace:*",
+		"@tailwindcss/vite": "^4.3.3",
 		"lucide-react": "^1.31.0",
-		"open-props": "^1.7.23",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8",
+		"tailwindcss": "^4.3.3",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
