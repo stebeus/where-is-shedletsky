@@ -21,7 +21,7 @@ type CharactersPopoverProps = {
 	) => void;
 };
 
-const Toast = ({ onTimeout }: ToastProps) => {
+const Alert = ({ onTimeout }: ToastProps) => {
 	useTimeout(onTimeout, 4500);
 	useScreenShake();
 
@@ -81,7 +81,7 @@ export const CharactersPopover = ({
 			>
 				{characters.map(renderCharacter)}
 			</ul>
-			{isCharacter === false && <Toast onTimeout={() => setIsCharacter(undefined)} />}
+			{isCharacter === false && <Alert onTimeout={() => setIsCharacter(undefined)} />}
 		</>
 	);
 };
