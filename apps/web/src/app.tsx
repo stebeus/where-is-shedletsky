@@ -1,4 +1,4 @@
-import { Suspense, use, useEffect, useRef, useState } from 'react';
+import { Suspense, use, useRef, useState } from 'react';
 
 import { ErrorBoundary, Footer, Header } from './components/index.ts';
 import { Button, Duration, InvokerProvider, Loader } from './components/ui/index.ts';
@@ -10,6 +10,7 @@ import {
 	Photograph,
 	type Position,
 	useCharacters,
+	useGameOver,
 } from './features/game/index.ts';
 import { useInterval } from './hooks/timer.ts';
 
@@ -43,11 +44,7 @@ const Game = () => {
 	const timeout = canTick ? centisecondDelay : undefined;
 	useInterval(() => setTimer(timer + centisecondDelay), timeout);
 
-	useEffect(() => {
-		if (remainingCharacters.length > 0) return;
-		setCanTick(false);
-		authRef.current?.showModal();
-	}, [remainingCharacters]);
+	useGameOver(remainingCharacters, setCanTick, authRef);
 
 	return (
 		<>
