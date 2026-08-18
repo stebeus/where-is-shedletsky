@@ -13,7 +13,14 @@ export type DialogProps = ComponentProps<'dialog'>;
 
 const ModalWindow = (props: DialogProps) => {
 	const { id } = useInvoker();
-	return <dialog id={id} {...props} />;
+
+	return (
+		<dialog
+			id={id}
+			className="place-self-center-safe open:stack p-8 text-gray-700 shadow-2xl/10 shadow-blue-950 open:gap-4"
+			{...props}
+		/>
+	);
 };
 
 const DialogWindow = (props: DialogProps) => <ModalWindow popover="auto" {...props} />;

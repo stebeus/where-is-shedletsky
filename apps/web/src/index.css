@@ -1,1 +1,131 @@
 @import 'tailwindcss';
+
+:root {
+	--cell-size: clamp(6px, 2.625vw, 30px);
+	--photograph-width: repeat(36, var(--cell-size));
+	--photograph-height: repeat(20, var(--cell-size));
+}
+
+@theme {
+	--animate-dots: dots var(--duration-3) steps(4, jump-none) infinite;
+	--animate-fade-out: fade-out var(--duration-4) var(--duration-4) ease-out forwards;
+	--animate-pulse-outline: pulse-outline var(--duration-1) steps(2) infinite alternate;
+	--animate-shake-screen: shake-screen var(--duration-1) cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+	--background-image-photograph: url('assets/where-is-shedletsky.webp');
+	--background-image-sky: url('assets/background.webp');
+
+	--duration-1: 250ms;
+	--duration-2: 750ms;
+	--duration-3: 1500ms;
+	--duration-4: 2500ms;
+
+	--cursor-dot: url('assets/cursor.svg'), auto;
+
+	@keyframes dots {
+		from,
+		to {
+			content: '';
+		}
+
+		25% {
+			content: '.';
+		}
+
+		50% {
+			content: '..';
+		}
+
+		75% {
+			content: '...';
+		}
+	}
+
+	@keyframes fade-out {
+		from {
+			opacity: 1;
+		}
+
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes pulse-outline {
+		from {
+			outline-offset: 2px;
+		}
+
+		to {
+			outline-offset: -6px;
+		}
+	}
+
+	@keyframes shake-screen {
+		10%,
+		90% {
+			transform: translateX(-3px);
+		}
+
+		20%,
+		80% {
+			transform: translateX(5px);
+		}
+
+		30%,
+		50%,
+		70% {
+			transform: translateX(-6px);
+		}
+
+		40%,
+		60% {
+			transform: translateX(6px);
+		}
+	}
+}
+
+@layer base {
+	*:focus-visible {
+		outline: 2px dashed var(--color-red-500);
+	}
+
+	h1 {
+		font-size: var(--text-xl);
+		font-weight: var(--font-weight-bold);
+	}
+
+	:where(dialog h1) {
+		color: var(--color-gray-800);
+	}
+}
+
+@layer components {
+	.characters-popover {
+		position-anchor: characters-popover;
+		position-area: bottom left;
+		position-try-fallbacks: flip-block, flip-inline, flip-start;
+	}
+}
+
+@utility separator {
+	&::after {
+		margin-inline: --spacing(3);
+		content: '';
+		border-left: 1px solid --alpha(var(--color-gray-100) / 50%);
+	}
+}
+
+@utility stack {
+	display: flex;
+	flex-direction: column;
+	gap: --spacing(1);
+}
+
+@utility transition-spin {
+	transition: transform var(--duration-2);
+
+	&:hover {
+		transform: rotate(1turn);
+	}
+}

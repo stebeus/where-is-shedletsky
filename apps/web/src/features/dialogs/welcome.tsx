@@ -3,6 +3,7 @@ import type { Character } from '@repo/contracts/characters';
 import { useEffect, useRef } from 'react';
 
 import { type DialogProps, Modal } from '#components/index.ts';
+import { Shortcut } from '#components/ui/index.ts';
 import { env } from '#env.ts';
 
 type WelcomeProps = Pick<DialogProps, 'onClose'> & {
@@ -23,7 +24,7 @@ export const Welcome = ({ characters, onClose }: WelcomeProps) => {
 					their eyes and then selecting their names correctly.
 				</p>
 				<p>
-					You can also press <kbd>Tab</kbd> to get to each character quickly.
+					You can also press <Shortcut>Tab</Shortcut> to get to each character quickly.
 				</p>
 				<Modal.Close>Play now</Modal.Close>
 			</Modal.Window>

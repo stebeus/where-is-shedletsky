@@ -5,7 +5,11 @@ import { createSafeContext } from '#hooks/context.tsx';
 export type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
 export const Button = ({ type = 'button', ...props }: ButtonProps) => (
-	<button type={type} {...props} />
+	<button
+		className="cursor-pointer bg-sky-900 px-3 py-1 font-medium text-white hover:bg-sky-800"
+		type={type}
+		{...props}
+	/>
 );
 
 export const [InvokerProvider, useInvoker] = createSafeContext('Invoker', () => ({ id: useId() }));

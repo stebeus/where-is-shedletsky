@@ -50,12 +50,22 @@ const Game = () => {
 		<>
 			<Header />
 			<main>
-				<Duration milliseconds={timer} />
-				<p aria-live="polite">{remainingCharacters.length} characters remaining</p>
-				<Button onClick={restart}>Restart</Button>
-				<Leaderboard />
+				<div className="shadow/10 flex flex-wrap-reverse justify-between gap-1 shadow-blue-950">
+					<div className="items-center-safe flex bg-sky-900 px-3 py-1 font-medium">
+						<Duration
+							className="separator"
+							milliseconds={timer}
+							rounding={{ smallestUnit: 'seconds' }}
+						/>
+						<p aria-live="polite">{remainingCharacters.length} characters remaining</p>
+					</div>
+					<div className="flex gap-1">
+						<Button onClick={restart}>Restart</Button>
+						<Leaderboard />
+					</div>
+				</div>
 				<InvokerProvider>
-					<Photograph characters={characters} positionSetter={setPosition} />
+					<Photograph characters={characters} position={position} positionSetter={setPosition} />
 					<CharactersPopover
 						characters={remainingCharacters}
 						position={position}

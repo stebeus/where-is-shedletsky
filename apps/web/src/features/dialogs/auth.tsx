@@ -34,7 +34,6 @@ const fields = [
 	},
 	{
 		label: 'Password',
-		helperText: `Password must be at least ${password.minLength} characters long`,
 		children: renderInput({
 			autoComplete: 'new-password',
 			minLength: password.minLength as number,
@@ -54,7 +53,7 @@ export const Auth = ({ bestTime, onAction, ref }: AuthProps) => {
 	const { error, submit } = useForm(`users/${endpoint}`, onAction, { metadata: { bestTime } });
 
 	const renderSubmitButton = ({ endpoint, children }: SubmitButtonProps) => (
-		<SubmitButton onClick={() => setEndpoint(endpoint)} key={crypto.randomUUID()}>
+		<SubmitButton onClick={() => setEndpoint(endpoint)} key={endpoint}>
 			{children}
 		</SubmitButton>
 	);
@@ -62,7 +61,7 @@ export const Auth = ({ bestTime, onAction, ref }: AuthProps) => {
 	return (
 		<Modal.Root>
 			<Modal.Window closedby="none" ref={ref}>
-				<form onSubmit={submit}>
+				<form className="contents" onSubmit={submit}>
 					<h1>New high score!</h1>
 					<p>
 						You finished in <Duration milliseconds={bestTime} format={{ style: 'long' }} />.

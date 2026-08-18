@@ -22,15 +22,21 @@ type ErrorBoundaryState = {
 };
 
 const ErrorFallback = ({ error, reset }: ErrorFallbackProps) => (
-	<>
+	<div className="contents not-[dialog>*]:drop-shadow-blue-950 not-[dialog>*]:drop-shadow-xs/25">
 		<h1>Oops - you've reached this page in error</h1>
-		<p>
+		<p className="text-center">
 			{FetchError.isFetchError(error) && `${error.status} `}
 			{error.message}
 		</p>
-		<img src={errorImage} alt="Noob poking a bomb with a stick" width={280} height={280} />
+		<img
+			className="place-self-center-safe border border-gray-300"
+			src={errorImage}
+			alt="Noob poking a bomb with a stick"
+			width={280}
+			height={280}
+		/>
 		<Button onClick={reset}>Reload</Button>
-	</>
+	</div>
 );
 
 const renderErrorFallback = (props: ErrorFallbackProps) => <ErrorFallback {...props} />;

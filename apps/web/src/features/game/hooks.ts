@@ -13,3 +13,14 @@ export const useGameOver = (
 		authRef.current?.showModal();
 	}, [remainingCharacters, canTickSetter, authRef]);
 };
+
+export const useScreenShake = () => {
+	useEffect(() => {
+		const { body } = document;
+		const animation = 'animate-shake-screen';
+
+		body.classList.add(animation);
+
+		return () => body.classList.remove(animation);
+	}, []);
+};

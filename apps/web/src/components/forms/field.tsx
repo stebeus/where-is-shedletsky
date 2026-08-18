@@ -21,10 +21,14 @@ const Field = ({ label, helperText, children }: FieldProps) => {
 
 	return (
 		// biome-ignore lint/a11y/noLabelWithoutControl: the children are form controls
-		<label>
-			<span>{label}</span>
+		<label className="stack">
+			<span className="font-medium text-gray-700">{label}</span>
 			{children({ name, helperTextId: helperText == null ? undefined : helperTextId })}
-			{helperText != null && <span id={helperTextId}>{helperText}</span>}
+			{helperText != null && (
+				<span id={helperTextId} className="text-sm">
+					{helperText}
+				</span>
+			)}
 		</label>
 	);
 };

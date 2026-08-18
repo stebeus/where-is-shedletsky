@@ -15,16 +15,22 @@ type UsersProps = {
 const fetchUsers = () => fetchData<GetUserResponse[]>('users');
 
 const User = ({ username, bestTime }: GetUserResponse) => (
-	<li>
-		{username} <Duration milliseconds={bestTime} format={{ style: 'narrow' }} />
+	<li className="flex flex-wrap gap-2 border border-gray-300 nth-1:border-yellow-700/25 nth-2:border-slate-600/25 nth-3:border-orange-700/25 nth-1:bg-yellow-700/5 nth-2:bg-slate-600/5 nth-3:bg-orange-700/5 px-3 py-2 nth-1:text-yellow-700 nth-2:text-slate-600 nth-3:text-orange-700 before:content-['#'_counter(item,decimal)] before:[counter-increment:item]">
+		<span className="mr-auto">{username}</span>
+		<Duration milliseconds={bestTime} />
 	</li>
 );
 
-const renderUser = (props: GetUserResponse) => <User {...props} key={crypto.randomUUID()} />;
+const renderUser = (user: GetUserResponse) => <User {...user} key={user.id} />;
 
 const Users = ({ data }: UsersProps) => {
 	const users = use(data);
-	return <ol>{users.map(renderUser)}</ol>;
+
+	return (
+		<ol className="stack max-h-[50svh] gap-2 overflow-auto [counter-reset:item]">
+			{users.map(renderUser)}
+		</ol>
+	);
 };
 
 export const Leaderboard = () => {

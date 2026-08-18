@@ -1,11 +1,13 @@
 import type { CharacterUi, Position } from './types.ts';
 
+import { CircleX } from 'lucide-react';
 import { useState } from 'react';
 
 import { PopoverClose, useInvoker } from '#components/ui/index.ts';
 import { useTimeout } from '#hooks/timer.ts';
 
 import { fetchCharacter } from './helpers.ts';
+import { useScreenShake } from './hooks.ts';
 
 type ToastProps = {
 	onTimeout: () => void;
@@ -20,8 +22,18 @@ type CharactersPopoverProps = {
 };
 
 const Toast = ({ onTimeout }: ToastProps) => {
-	useTimeout(onTimeout, 3000);
-	return <p role="alert">Wrong character</p>;
+	useTimeout(onTimeout, 4500);
+	useScreenShake();
+
+	return (
+		<p
+			className="shadow/10 justify-center-safe mt-1 flex animate-fade-out gap-2 bg-red-500 py-1 font-medium text-red-50 shadow-blue-950"
+			role="alert"
+		>
+			<CircleX />
+			Wrong character!
+		</p>
+	);
 };
 
 export const CharactersPopover = ({
@@ -45,9 +57,16 @@ export const CharactersPopover = ({
 		charactersSetter(updateCharacters);
 	};
 
-	const renderCharacter = ({ name }: CharacterUi) => (
-		<li key={crypto.randomUUID()}>
-			<PopoverClose role="menuitem" onClick={() => assertCharacter(name, position)}>
+	const renderCharacter = ({ id, name }: CharacterUi) => (
+		<li
+			className="border-gray-300 not-last:border-b px-2 py-1 text-gray-700 hover:bg-gray-300 hover:text-gray-800"
+			key={id}
+		>
+			<PopoverClose
+				className="w-full cursor-pointer"
+				role="menuitem"
+				onClick={() => assertCharacter(name, position)}
+			>
 				{name}
 			</PopoverClose>
 		</li>
@@ -55,7 +74,11 @@ export const CharactersPopover = ({
 
 	return (
 		<>
-			<ul id={id} popover="auto">
+			<ul
+				id={id}
+				className="characters-popover absolute max-h-[50svh] shadow-2xl/25"
+				popover="auto"
+			>
 				{characters.map(renderCharacter)}
 			</ul>
 			{isCharacter === false && <Toast onTimeout={() => setIsCharacter(undefined)} />}

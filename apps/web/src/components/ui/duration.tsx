@@ -1,19 +1,27 @@
-type DurationProps = {
+import type { ComponentPropsWithoutRef } from 'react';
+
+type DurationProps = ComponentPropsWithoutRef<'base'> & {
 	milliseconds: number;
 	locales?: Intl.LocalesArgument;
+	rounding?: Temporal.DurationRoundingOptions;
 	format?: Intl.DurationFormatOptions;
 };
 
 export const Duration = ({
+	className,
 	milliseconds,
 	locales = 'en',
-	format: { style = 'digital', hoursDisplay = 'auto', minutesDisplay = 'auto', ...format } = {},
+	rounding,
+	format: { style = 'narrow', ...format } = {},
 }: DurationProps) => {
-	const duration = Temporal.Duration.from({ milliseconds }).round({ largestUnit: 'days' });
+	const duration = Temporal.Duration.from({ milliseconds }).round({
+		largestUnit: 'days',
+		...rounding,
+	});
 
 	return (
-		<time dateTime={duration.toString()}>
-			{duration.toLocaleString(locales, { style, hoursDisplay, minutesDisplay, ...format })}
+		<time className={className} dateTime={duration.toString()}>
+			{duration.toLocaleString(locales, { style, ...format }) || 0}
 		</time>
 	);
 };
