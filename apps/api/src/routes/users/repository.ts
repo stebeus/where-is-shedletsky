@@ -1,6 +1,6 @@
 import type { NewUser, UserUpdate } from '@repo/contracts/users';
 
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, gt, sql } from 'drizzle-orm';
 
 import { db } from '#db/client.ts';
 
@@ -35,7 +35,7 @@ export const update = async ({ username, bestTime }: UserUpdate) => {
 	const [data] = await db
 		.update(users)
 		.set({ username, bestTime })
-		.where(eq(users.username, username))
+		.where(and(eq(users.username, username), gt(users.bestTime, bestTime)))
 		.returning();
 
 	return data;
