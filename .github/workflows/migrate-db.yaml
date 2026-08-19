@@ -40,6 +40,6 @@ jobs:
         run: pnpm ci
 
       - name: Migrate database
-        run: pnpm --filter=api drizzle-kit migrate
+        run: pnpm --filter=api db:migrate
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
