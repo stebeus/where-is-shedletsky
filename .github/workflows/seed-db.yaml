@@ -28,7 +28,7 @@ jobs:
       - name: Build internal packages
         run: pnpm build --filter=api^...
 
-      - name: Migrate database
+      - name: Seed database
         run: pnpm --filter=api db:seed
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
