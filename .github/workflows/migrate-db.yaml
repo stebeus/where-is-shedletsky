@@ -11,6 +11,8 @@ on:
       - pnpm-lock.yaml
       - .github/workflows/migrate-db.yaml
 
+  workflow_dispatch:
+
 concurrency:
   group: db-migrations-${{ github.ref }}
   cancel-in-progress: false
