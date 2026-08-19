@@ -5,8 +5,8 @@ Be the quickest player to find all Roblox characters by clicking on their eyes a
 ## Features
 
 - **Global Ranking:** Compete for the quickest times worldwide.
-- **Sequential Character Selection:** Press <kbd>Tab</kbd> to select each character of the photograph.
 - **Screen Reader Accessible:** Live announcements for character selection and validation.
+- **Sequential Character Selection:** Press <kbd>Tab</kbd> to select each character of the photograph.
 
 ## Attribution
 
