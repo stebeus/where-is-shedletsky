@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: pnpm ci
 
+      - name: Build internal packages
+        run: pnpm build --filter=api^...
+
       - name: Migrate database
         run: pnpm --filter=api db:migrate
         env:
