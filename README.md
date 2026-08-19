@@ -1,6 +1,6 @@
 # Where's Shedletsky?
 
-Be the quickest player to find all Roblox characters, by clicking on their eyes and then selecting their names correctly.
+Be the quickest player to find all Roblox characters by clicking on their eyes and then selecting their names correctly.
 
 ## Attribution
 
