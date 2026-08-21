@@ -12,7 +12,7 @@
 
 		// Projects
 		"composite": true,
-		"tsBuildInfoFile": "${configDir}/node_modules/.cache/tsconfig.build.tsbuildinfo"
+		"tsBuildInfoFile": "${configDir}/tsconfig.build.tsbuildinfo"
 	},
 	"include": ["${configDir}/src"],
 	"exclude": [

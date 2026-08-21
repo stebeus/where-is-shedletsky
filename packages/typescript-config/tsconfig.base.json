@@ -12,7 +12,7 @@
 		"target": "esnext",
 
 		// Projects
-		"tsBuildInfoFile": "${configDir}/node_modules/.cache/tsconfig.tsbuildinfo",
+		"tsBuildInfoFile": "${configDir}/tsconfig.tsbuildinfo",
 
 		// Completeness
 		"skipLibCheck": true
