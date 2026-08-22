@@ -42,7 +42,7 @@ const renderCell =
 
 		return (
 			<PopoverTrigger
-				className="cell justify-center-safe items-center-safe flex cursor-dot mix-blend-difference outline-white -outline-offset-2 hover:outline-2 focus-visible:outline-2 active:outline-4 active:-outline-offset-4 disabled:mix-blend-screen disabled:outline-none focus-visible:enabled:aria-[label]:animate-pulse-outline hover:enabled:aria-[label]:animate-pulse-outline"
+				className="cell justify-center-safe items-center-safe flex cursor-dot mix-blend-difference outline-white -outline-offset-2 hover:outline-2 focus-visible:outline-2 active:outline-4 active:-outline-offset-4 disabled:mix-blend-screen disabled:outline-none focus-visible:enabled:aria-[label]:animate-pulse-outline focus-visible:enabled:aria-[label]:mix-blend-screen focus-visible:enabled:aria-[label]:outline-red-500 hover:enabled:aria-[label]:animate-pulse-outline hover:enabled:aria-[label]:mix-blend-screen hover:enabled:aria-[label]:outline-red-500"
 				disabled={wasFound}
 				style={isActive ? { anchorName: '--characters-popover' } : undefined}
 				{...ariaLabel}
