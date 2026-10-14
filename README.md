@@ -2,7 +2,7 @@
 
 Be the quickest player to find all Roblox characters by clicking on their eyes and then selecting their names correctly.
 
-[Preview](https://where-is-shedletsky.stebeus.workers.dev/) 👈
+[Play now](https://where-is-shedletsky.stebeus.workers.dev/) 🕹️
 
 ## Features
 
